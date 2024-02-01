@@ -78,4 +78,12 @@ public class InputForm extends JPanel {
     public String getPass() {
         return txtPass.getText();
     }
+    
+    public void setPass(String s) {
+        txtPass.setText(s);
+    }
+
+    public void setText(String content) {
+        txtForm.setText(content);
+    }
 }

@@ -26,8 +26,8 @@ import static org.apache.commons.math3.stat.StatUtils.mode;
 public class MainProgram extends JFrame {
     AccountDTO user;
     public JPanel MainContent;
-    Color MainColor = new Color(250, 250, 250);
-    
+    Color MainColor = new Color(230, 230, 230);
+    Color white = new Color(230,230,230);
     private MenuTaskBar menuTaskbar;
     public MainProgram() {
         KhoiTao();
@@ -59,6 +59,15 @@ public class MainProgram extends JFrame {
         this.add(MainContent, BorderLayout.CENTER);
         
         TrangChu dashboard = new TrangChu();
+        dashboard.setBackground(white);
         MainContent.add(dashboard); 
     }
+    
+    public void changePages(JPanel pn) {
+        MainContent.removeAll();
+        MainContent.add(pn);
+        MainContent.repaint();
+        MainContent.validate();
+    }
+    
 }

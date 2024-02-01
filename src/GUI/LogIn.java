@@ -35,6 +35,8 @@ public class LogIn extends JFrame implements KeyListener {
 
     public LogIn()  {
        KhoiTaoComponent();
+       txtUsername.setText("admin");
+       txtPassword.setPass("123456");
     }
     
     private void KhoiTaoComponent() {
@@ -113,7 +115,7 @@ public class LogIn extends JFrame implements KeyListener {
                     JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 } else {
                     this.dispose();
-                    MainProgram main = new MainProgram();
+                    MainProgram main = new MainProgram(tk);
                     main.setVisible(true);
                 }
 
