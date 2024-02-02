@@ -8,6 +8,7 @@ import DTO.AccountDTO;
 import GUI.Component.LeftMenu;
 import GUI.Component.MenuTaskBar;
 import GUI.Panel.TrangChu;
+import GUI.Panel.TrangChu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
