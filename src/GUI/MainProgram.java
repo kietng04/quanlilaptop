@@ -5,9 +5,7 @@
 package GUI;
 
 import DTO.AccountDTO;
-import GUI.Component.LeftMenu;
 import GUI.Component.MenuTaskBar;
-import GUI.Panel.TrangChu;
 import GUI.Panel.TrangChu;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,8 +25,8 @@ import static org.apache.commons.math3.stat.StatUtils.mode;
 public class MainProgram extends JFrame {
     AccountDTO user;
     public JPanel MainContent;
-    Color MainColor = new Color(230, 230, 230);
-    Color white = new Color(230,230,230);
+    Color MainColor = new Color(255, 255, 255);
+    Color white = new Color(255,255,255);
     private MenuTaskBar menuTaskbar;
     public MainProgram() {
         KhoiTao();

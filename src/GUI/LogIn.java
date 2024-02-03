@@ -31,8 +31,6 @@ public class LogIn extends JFrame implements KeyListener {
     JLabel lblImage, lbl1, lbl2, lbl3, lbl4, lbl5, lbLogin, lbl7;
     InputForm txtUsername, txtPassword;
 
-    Color FontColor = new Color(96, 125, 139);
-
     public LogIn()  {
        KhoiTaoComponent();
        txtUsername.setText("admin");

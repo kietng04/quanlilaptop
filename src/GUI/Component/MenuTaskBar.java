@@ -7,6 +7,7 @@ package GUI.Component;
 import DTO.AccountDTO;
 import GUI.MainProgram;
 import GUI.Panel.TrangChu;
+import com.raven.form.FormItems;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -114,6 +115,15 @@ public class MenuTaskBar extends JPanel {
             public void mousePressed(MouseEvent evt) {
                 TrangChu a = new TrangChu();
                 main.changePages(a);
+            }
+        });
+        
+        listitem[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                FormItems product = new FormItems();
+                main.changePages(product);
+
             }
         });
         

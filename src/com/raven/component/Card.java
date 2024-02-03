@@ -48,15 +48,16 @@ public class Card extends javax.swing.JPanel {
         pro = new com.raven.swing.ProgressBarCustom();
         lbPer = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         lbTitle.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(225, 225, 225));
-        lbTitle.setText("Title");
+        lbTitle.setText("Khách hàng");
 
         lbValues.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         lbValues.setForeground(new java.awt.Color(225, 225, 225));
-        lbValues.setText("Values");
+        lbValues.setText("999");
 
         lbIcon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
