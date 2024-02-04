@@ -18,7 +18,7 @@ public interface DAOInterface<T> {
     
     public int delete(String t);
     
-    public ArrayList<T> selectAll();
+    public ArrayList<T> getAllData();
     
     public T selectById(String t);
     

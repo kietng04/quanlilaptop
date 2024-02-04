@@ -63,7 +63,7 @@ public class AccountDAO implements DAOInterface<AccountDTO> {
     }
 
     @Override
-    public ArrayList<AccountDTO> selectAll() {
+    public ArrayList<AccountDTO> getAllData() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

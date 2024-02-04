@@ -6,8 +6,8 @@ package GUI.Component;
 
 import DTO.AccountDTO;
 import GUI.MainProgram;
-import GUI.Panel.TrangChu;
-import com.raven.form.FormItems;
+import GUI.Menu.TrangChu;
+import GUI.Menu.FormItems;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

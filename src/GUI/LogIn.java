@@ -128,6 +128,7 @@ public class LogIn extends JFrame implements KeyListener {
         FlatIntelliJLaf.registerCustomDefaultsSource("style");
         FlatIntelliJLaf.setup();
         UIManager.put("PasswordField.showRevealButton", true);
+        UIManager.put("PopupMenu.borderCornerRadius", 100);
         LogIn login = new LogIn();
         login.setVisible(true);
     }

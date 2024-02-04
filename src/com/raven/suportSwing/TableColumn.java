@@ -2,9 +2,11 @@ package com.raven.suportSwing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class TableColumn extends JTable {
@@ -31,4 +33,6 @@ public class TableColumn extends JTable {
         }
         return new TableCell(getValueAt(i, i1), isCellSelected(i, i1), celLType);
     }
+    
+    
 }
