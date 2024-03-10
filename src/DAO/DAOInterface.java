@@ -16,7 +16,7 @@ public interface DAOInterface<T> {
     
     public int update(T t);
     
-    public int delete(String t);
+    public int delete(int t);
     
     public ArrayList<T> getAllData();
     

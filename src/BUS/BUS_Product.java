@@ -14,13 +14,34 @@ import java.util.ArrayList;
  */
 public class BUS_Product {
     public DAO_Product product = new DAO_Product();
-    private ArrayList<DTO_Product> listProduct = new ArrayList<>();
     
     public BUS_Product() {
-        listProduct = product.getAllData();
+
     }
     
     public ArrayList<DTO_Product> getAllData() {
-        return this.listProduct;
+        return product.getAllData();
     }
+    
+    public void insert(DTO_Product t) {
+        product.insert(t);
+    }
+
+    public void update(DTO_Product t) {
+        product.update(t);
+    }
+
+    public void delete(int id) {
+        product.delete(id);
+    }
+    
+    public int getmaloainew() {
+        return product.getMaxRow();
+    }
+    
+    public DTO_Product getProductByID(int id) {
+        return product.getProductByID(id);
+    }
+
+
 }

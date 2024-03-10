@@ -13,26 +13,41 @@ public class DTO_Product {
     private String tensanpham;
     private String boxuly;
     private String hedieuhanh;
-    private int soluong;
     private String vitrikho;
     private String hinhsanpham;
-    private String maloai;
     private String thoigianbaohanh;
     private int trangthai;
+    private String thuonghieu;
+    private int maLoai;
     
-    public DTO_Product(int masanpham, String tensanpham, String boxuly, String hedieuhanh, int soluong, String vitrikho, String hinhsanpham, String maloai, String thoigianbaohanh, int trangthai) {
+    public DTO_Product(int masanpham, String tensanpham, String boxuly, String hedieuhanh, String vitrikho, String hinhsanpham, String thoigianbaohanh, int trangthai, String thuonghieu, int maLoai) {
         this.masanpham = masanpham;
         this.tensanpham = tensanpham;
         this.boxuly = boxuly;
         this.hedieuhanh = hedieuhanh;
-        this.soluong = soluong;
         this.vitrikho = vitrikho;
         this.hinhsanpham = hinhsanpham;
-        this.maloai = maloai;
         this.thoigianbaohanh = thoigianbaohanh;
         this.trangthai = trangthai;
+        this.thuonghieu = thuonghieu;
+        this.maLoai = maLoai;
     }
     
+    public int getmaLoai() {
+        return maLoai;
+    }
+    
+    public void setmaLoai(int maLoai) {
+        this.maLoai = maLoai;
+    }
+    
+    public String getThuonghieu() {
+        return this.thuonghieu;
+    }
+    
+    public void setthuonghieu(String thuonghieu) {
+        this.thuonghieu = thuonghieu;
+    }
     public int getMasanpham() {
         return masanpham;
     }
@@ -69,15 +84,6 @@ public class DTO_Product {
         this.hedieuhanh = hedieuhanh;
     }
 
-    // Getter và Setter cho soluong
-    public int getSoluong() {
-        return soluong;
-    }
-
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
-    }
-
     // Getter và Setter cho vitrikho
     public String getVitrikho() {
         return vitrikho;
@@ -94,15 +100,6 @@ public class DTO_Product {
 
     public void setHinhsanpham(String hinhsanpham) {
         this.hinhsanpham = hinhsanpham;
-    }
-
-    // Getter và Setter cho maloai
-    public String getMaloai() {
-        return maloai;
-    }
-
-    public void setMaloai(String maloai) {
-        this.maloai = maloai;
     }
 
     // Getter và Setter cho thoigianbaohanh

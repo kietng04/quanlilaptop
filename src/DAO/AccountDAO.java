@@ -58,7 +58,7 @@ public class AccountDAO implements DAOInterface<AccountDTO> {
     }
 
     @Override
-    public int delete(String t) {
+    public int delete(int t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
