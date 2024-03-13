@@ -23,6 +23,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import BUS.BUS_ChiTietCauHinh;
 import BUS.BUS_Product;
+import BUS.BUS_RamList;
 import ConnectDB.JDBCUtil;
 import DTO.DTO_ChiTietCauHinh;
 
@@ -30,59 +31,41 @@ import DTO.DTO_ChiTietCauHinh;
  *
  * @author Kiet
  */
-public class ViewCauHinh extends javax.swing.JDialog {
+public class QuanLyRAM extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewCauHinh
      */
     BUS_ChiTietCauHinh bus_ChiTietCauHinh = new BUS_ChiTietCauHinh();
-    int productid;
     java.awt.Frame parent;
     String currentIDselected = "-1";
-    public ViewCauHinh(java.awt.Frame parent, boolean modal, int productid) {
+    BUS_RamList bus_RamList = new BUS_RamList();
+    public QuanLyRAM(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.productid = productid;
         this.parent = parent;
-        fillTablePhienBanSP();
-        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selectedRow = jTable1.getSelectedRow();
-                    if (selectedRow != -1) { // Đảm bảo rằng có hàng được chọn
-                        currentIDselected = jTable1.getValueAt(selectedRow, 0).toString();
-                    }
-                }
-            }
+        filltableram();
+    }
+    public void filltableram() {
+        // clear table
+        ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
+        bus_RamList.getAllData().forEach((dto) -> {
+            ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
+                dto.getMaram(),
+                dto.getKichThuocRam()
+            });
+            System.out.println("1");
         });
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        } 
+
     }
-    // function to fill table
-    public void fillTablePhienBanSP() {       
-            ArrayList<DTO_ChiTietCauHinh> list = bus_ChiTietCauHinh.getCauHinhbyID(productid);
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
-            Object[] row = new Object[7];
-            for (int i = 0; i < list.size(); i++) {
-                row[0] = list.get(i).getMaphienbansp();
-                row[1] = list.get(i).getRam() + " GB";
-                row[2] = list.get(i).getRom() + " GB";
-                row[3] = list.get(i).getGianhapVND();
-                row[4] = list.get(i).getGiaxuatVND();
-                row[5] = list.get(i).getSoluongton();
-                
-                model.addRow(row);
-            }
-
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-            }  
-             
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,15 +92,16 @@ public class ViewCauHinh extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Mã phiên bản", "RAM", "ROM", "Giá nhập", "Giá xuất", "Số lượng tồn"
+                "Mã RAM", "Dung lượng RAM"
             }
         ));
+        jTable1.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
@@ -199,25 +183,26 @@ public class ViewCauHinh extends javax.swing.JDialog {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("LAPTOP LENOVO IDEAPAD S145");
+        jLabel4.setText("QUẢN LÝ RAM");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(253, 253, 253))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(368, 368, 368)
+                        .addComponent(jLabel4)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +226,7 @@ public class ViewCauHinh extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,41 +239,15 @@ public class ViewCauHinh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        // TODO add your handling code here:
-        ThemCauHinh addCauHinh = new ThemCauHinh(parent, true, productid + "");
-        addCauHinh.setLocationRelativeTo(null);
-        addCauHinh.setVisible(true);
-        addCauHinh.setResizable(false);
-        fillTablePhienBanSP();
+        // them
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-        // TODO add your handling code here: sua
-        if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn một phiên bản sản phẩm để sửa");
-            return;
-        }
-        SuaCauHinh editCauHinh = new SuaCauHinh(parent, true, currentIDselected);
-        editCauHinh.setLocationRelativeTo(null);
-        editCauHinh.setVisible(true);
-        editCauHinh.setResizable(false);
-        fillTablePhienBanSP();
-        currentIDselected = "-1";
+        // sua
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
-        // TODO add your handling code here: xoa
-        if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn một phiên bản sản phẩm để xóa");
-            return;
-        }
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa phiên bản sản phẩm này?", "Xác nhận", dialogButton);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-            bus_ChiTietCauHinh.delete(productid + "",currentIDselected);
-            fillTablePhienBanSP();
-            currentIDselected = "-1";
-        }
+        //  xoa
     }//GEN-LAST:event_jPanel4MousePressed
 
     /**
@@ -310,14 +267,16 @@ public class ViewCauHinh extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the dialog */

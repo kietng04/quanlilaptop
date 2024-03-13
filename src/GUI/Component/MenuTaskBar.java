@@ -8,6 +8,7 @@ import DTO.AccountDTO;
 import GUI.MainProgram;
 import GUI.Menu.TrangChu;
 import GUI.Menu.FormItems;
+import GUI.Menu.QuanLyThuocTinh;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,12 +31,13 @@ public class MenuTaskBar extends JPanel {
     Color HowerBackgroundColor = new Color(192, 192, 192);
     Color backgroundItemtaskbar = new Color(255, 255, 255);
     public boolean isSelected;
-    JPanel pnlBottom, pnlHeader;
+    JPanel pnlBottom, pnlHeader;    
 
     TrangChu trangchu;
     String[][] listComponent = {
             { "Trang chủ", "home.svg", "trangchu" },
             { "Sản phẩm", "product.svg", "sanpham" },
+            { "Thuộc tính", "product.svg", "sanpham" },
             { "Phiếu nhập", "phieunhap.svg", "phieunhap" },
             { "Phiếu xuất", "phieuxuat.svg", "phieuxuat" },
             { "Khách hàng", "khachhang.svg", "khachhang" },
@@ -128,11 +130,11 @@ public class MenuTaskBar extends JPanel {
             }
         });
 
-        listitem[4].addMouseListener(new MouseAdapter() {
+        listitem[2].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                JPanel a = new JPanel(); // sau khi ông có class giao diện thì thay JPanel thành tên classs là được
-                main.changePages(a);
+                QuanLyThuocTinh qltt =  new QuanLyThuocTinh(); 
+                main.changePages(qltt);
             }
         });
 

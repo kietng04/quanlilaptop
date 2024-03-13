@@ -40,4 +40,12 @@ public class BUS_ChiTietCauHinh {
     public int getMaxID(int masanpham) {
         return chitietproduct.getMaxID(masanpham);
     }
+
+    public DTO_ChiTietCauHinh getChiTietCauHinh(int maphienbansp) {
+        return chitietproduct.selectById(maphienbansp);
+    }
+
+    public void delete(String t1, String t2) {
+        chitietproduct.delete(t1, t2);
+    }
 }

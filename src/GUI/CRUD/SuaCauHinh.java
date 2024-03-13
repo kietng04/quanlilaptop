@@ -15,35 +15,39 @@ import DTO.DTO_ChiTietCauHinh;
  *
  * @author Kiet
  */
-public class ThemCauHinh extends javax.swing.JDialog {
+public class SuaCauHinh extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemCauHinh
      */
-    public String idsp = "-1";
+    public String idsp;
     public BUS_ChiTietCauHinh ctch = new BUS_ChiTietCauHinh();
     public BUS_RamList ram = new BUS_RamList();
     public BUS_RomList rom = new BUS_RomList();
-    public ThemCauHinh(java.awt.Frame parent, boolean modal, String idsp) {
+    public SuaCauHinh(java.awt.Frame parent, boolean modal, String idsp) {
         super(parent, modal);
-        // setResizable(false); thư viện lỗi không resizable được :((
         this.idsp = idsp;
         initComponents();
-        FillComboBoxRamAndRom();
-        // set resizable jdialog false
+        Fillinfo();
     }
 
-    public void FillComboBoxRamAndRom() {
-        jComboBox2.removeAllItems();
-        jComboBox2.addItem("Chọn RAM");
-        ram.getAllData().forEach((ram) -> {
-            jComboBox2.addItem(ram.getKichThuocRam() + " GB");
-        });
+    public void Fillinfo() {
         jComboBox1.removeAllItems();
+        jComboBox2.removeAllItems();
         jComboBox1.addItem("Chọn ROM");
-        rom.getAllData().forEach((rom) -> {
-            jComboBox1.addItem(rom.getKichThuocRom() + " GB");
+        jComboBox2.addItem("Chọn RAM");
+        ram.getAllData().forEach((dto) -> {
+            jComboBox2.addItem(dto.getKichThuocRam() + " GB");
         });
+        rom.getAllData().forEach((dto) -> {
+            jComboBox1.addItem(dto.getKichThuocRom() + " GB");
+        });
+        DTO_ChiTietCauHinh dto = ctch.getChiTietCauHinh(Integer.parseInt(idsp));
+        jComboBox1.setSelectedItem(dto.getRom() + " GB");
+        jComboBox2.setSelectedItem(dto.getRam() + " GB");
+        jTextField1.setText(String.valueOf(dto.getGiaxuat()));
+        jTextField2.setText(String.valueOf(dto.getGianhap()));
+        jTextField5.setText(String.valueOf(dto.getSoluongton()));
     }
 
     /**
@@ -54,7 +58,6 @@ public class ThemCauHinh extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -87,7 +90,8 @@ public class ThemCauHinh extends javax.swing.JDialog {
 
         jLabel6.setText("Số lượng tồn");
 
-        jButton1.setText("Thêm");
+        jButton1.setText("Sửa");
+        jButton1.setToolTipText("");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -96,7 +100,7 @@ public class ThemCauHinh extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 255, 255));
-        jLabel7.setText("THÊM CẤU HÌNH");
+        jLabel7.setText("SỬA CẤU HÌNH");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +111,7 @@ public class ThemCauHinh extends javax.swing.JDialog {
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(202, 202, 202))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -180,17 +184,7 @@ public class ThemCauHinh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        int ram = Integer.parseInt(jComboBox2.getSelectedItem().toString().split(" ")[0]);
-        int rom = Integer.parseInt(jComboBox1.getSelectedItem().toString().split(" ")[0]);
-        int giaNhap = Integer.parseInt(jTextField2.getText());
-        int giaXuat = Integer.parseInt(jTextField1.getText());
-        int soLuongTon = Integer.parseInt(jTextField5.getText());
-        int masanpham = Integer.parseInt(idsp);
-        int maphienbansp = ctch.getMaxID(masanpham) + 1;
-        DTO_ChiTietCauHinh newctch = new DTO_ChiTietCauHinh(maphienbansp, masanpham, rom, ram, giaNhap, giaXuat, soLuongTon);
-        ctch.insert(newctch);
-        JOptionPane.showMessageDialog(null, "Thêm thành công");
-        this.dispose();
+       // NUT SUA
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
@@ -210,14 +204,16 @@ public class ThemCauHinh extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaCauHinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the dialog */

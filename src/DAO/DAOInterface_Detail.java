@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public interface DAOInterface_Detail<T> {
     public int insert(ArrayList<T> t);
-    public void delete(String t);
+    public void delete(String t1, String t2);
     public int update(ArrayList<T> t, String pk);
     public ArrayList<T> selectAll(String t);
 }

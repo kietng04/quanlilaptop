@@ -27,7 +27,7 @@ public class InputForm extends JPanel {
     private JTextField txtForm;
     private JPasswordField txtPass;
     
-     public InputForm() {
+    public InputForm() {
          
     }
      

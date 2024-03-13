@@ -69,8 +69,18 @@ public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHin
     }
 
     @Override
-    public void delete(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void delete(String masanpham, String maphienbansp) {
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "Delete from phienbansanpham where maphienbansp = ? and masanpham = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(maphienbansp));
+            pst.setInt(2, Integer.parseInt(masanpham));
+            pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (SQLException ex) {
+            System.out.println("omg");
+        }
     }
 
     @Override
@@ -134,7 +144,6 @@ public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHin
             ResultSet rs = (ResultSet) pst.executeQuery();
             
             while (rs.next()) {
-                System.out.println("ccccccc");
                 int maphienbansp = rs.getInt("maphienbansp");
                 int masanpham = rs.getInt("masanpham");
                 int rom = rs.getInt("rom");
@@ -167,5 +176,28 @@ public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHin
             return -1;
         }
         return -1;
+    }
+
+    public DTO_ChiTietCauHinh selectById(int maphienbansp) {
+        DTO_ChiTietCauHinh result = new DTO_ChiTietCauHinh();
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM phienbansanpham WHERE maphienbansp = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, maphienbansp);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            if (rs.next()) {
+                int masanpham = rs.getInt("masanpham");
+                int rom = rs.getInt("rom");
+                int ram = rs.getInt("ram");
+                int gianhap = rs.getInt("gianhap");
+                int giaxuat = rs.getInt("giaxuat");
+                int soluongton = rs.getInt("soluongton");
+                result = new DTO_ChiTietCauHinh(maphienbansp, masanpham, rom, ram, gianhap, giaxuat, soluongton);
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return result;
     }
 }
