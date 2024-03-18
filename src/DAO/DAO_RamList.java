@@ -23,17 +23,52 @@ public class DAO_RamList implements DAOInterface<DTO_RamList> {
 
     @Override
     public int insert(DTO_RamList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "INSERT INTO `ram`(`MaRAM`, `KichThuocRam`, `TrangThai`) VALUES (?,?,1)";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t.getMaram());
+            pst.setInt(2, Integer.parseInt(t.getKichThuocRam()));
+            pst.execute();
+            JDBCUtil.close(con);
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public int update(DTO_RamList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE `ram` SET `KichThuocRam`=? WHERE `MaRAM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(t.getKichThuocRam()));
+            pst.setInt(2, t.getMaram());
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            System.out.println("loi sua ram");
+            return 0;
+        }
+        return result;
     }
 
     @Override
     public int delete(int t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE `ram` SET `TrangThai`=0 WHERE `MaRAM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t);
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            return 0;
+        }
+        return result;
     }
 
     @Override
@@ -66,5 +101,18 @@ public class DAO_RamList implements DAOInterface<DTO_RamList> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    
+    public static int getMaxIDRam() {
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT MAX(MaRAM) FROM ram";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 }

@@ -26,6 +26,7 @@ import BUS.BUS_Product;
 import BUS.BUS_RamList;
 import ConnectDB.JDBCUtil;
 import DTO.DTO_ChiTietCauHinh;
+import DTO.DTO_RamList;
 
 /**
  *
@@ -36,25 +37,35 @@ public class QuanLyRAM extends javax.swing.JDialog {
     /**
      * Creates new form ViewCauHinh
      */
+
     BUS_ChiTietCauHinh bus_ChiTietCauHinh = new BUS_ChiTietCauHinh();
     java.awt.Frame parent;
     String currentIDselected = "-1";
     BUS_RamList bus_RamList = new BUS_RamList();
+    ArrayList<DTO_RamList> listRAM = new ArrayList<>();
     public QuanLyRAM(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
-        filltableram();
+        listRAM = bus_RamList.getAllData();
+        filltableram(listRAM);
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (jTable1.getSelectedRow() > -1) {
+                    currentIDselected = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                }
+            }
+        });
     }
-    public void filltableram() {
+    public void filltableram(ArrayList<DTO_RamList> listRam) {
         // clear table
         ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
-        bus_RamList.getAllData().forEach((dto) -> {
+
+        listRam.forEach((dto) -> {
             ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
                 dto.getMaram(),
                 dto.getKichThuocRam()
             });
-            System.out.println("1");
         });
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -239,15 +250,36 @@ public class QuanLyRAM extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        // them
+        ThemRAM themRAM = new ThemRAM(parent, true, this);
+        themRAM.setLocationRelativeTo(null);
+        themRAM.setVisible(true);
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
         // sua
+        SuaRAM suaRAM = new SuaRAM(parent, true, currentIDselected, this);
+        suaRAM.setLocationRelativeTo(null);
+        suaRAM.setVisible(true);
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
-        //  xoa
+        // xoa
+        if (currentIDselected.equals("-1")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần xóa");
+            return;
+        }
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa RAM này không?", "Title on Box", dialogButton);
+        if (dialogResult == 0) {
+            // sua
+            if (bus_RamList.delete(Integer.parseInt(currentIDselected)) == 1) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                listRAM = bus_RamList.getAllData();
+                filltableram(listRAM);
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        }
     }//GEN-LAST:event_jPanel4MousePressed
 
     /**

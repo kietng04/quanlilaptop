@@ -4,6 +4,11 @@
  */
 package GUI.CRUD;
 
+import javax.swing.JOptionPane;
+
+import BUS.BUS_RamList;
+import DTO.DTO_RamList;
+
 /**
  *
  * @author Kiet
@@ -13,8 +18,11 @@ public class ThemRAM extends javax.swing.JDialog {
     /**
      * Creates new form ThemRAM
      */
-    public ThemRAM(java.awt.Frame parent, boolean modal) {
+    GUI.CRUD.QuanLyRAM qlram;
+    BUS_RamList busRam = new BUS_RamList();
+    public ThemRAM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyRAM qlram) {
         super(parent, modal);
+        this.qlram = qlram;
         initComponents();
     }
 
@@ -104,7 +112,14 @@ public class ThemRAM extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here: them
+        // TODO add your handling code here: them ram
+        String kichthuoc = jTextField1.getText();
+        int max = busRam.getMaxIDRAM();
+        busRam.insert(new DTO_RamList(max + 1, kichthuoc));
+        JOptionPane.showMessageDialog(null, "Thêm RAM thành công");
+        qlram.listRAM = busRam.getAllData();
+        qlram.filltableram(qlram.listRAM);
+        this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
@@ -135,18 +150,7 @@ public class ThemRAM extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ThemRAM dialog = new ThemRAM(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
