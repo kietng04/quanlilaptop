@@ -7,23 +7,28 @@ package GUI.CRUD;
 import javax.swing.JOptionPane;
 
 import BUS.BUS_RamList;
+import BUS.BUS_RomList;
 import DTO.DTO_RamList;
+import DTO.DTO_RomList;
 
 /**
  *
  * @author Kiet
  */
-public class ThemRAM extends javax.swing.JDialog {
+public class SuaROM extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemRAM
      */
-    GUI.CRUD.QuanLyRAM qlram;
-    BUS_RamList busRam = new BUS_RamList();
-    public ThemRAM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyRAM qlram) {
+    int id;
+    BUS_RomList bus = new BUS_RomList();
+    GUI.CRUD.QuanLyROM qlrom;
+    public SuaROM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyROM qlrom, String id) {
         super(parent, modal);
-        this.qlram = qlram;
+        this.id = Integer.parseInt(id);
+        this.qlrom = qlrom;
         initComponents();
+        jTextField1.setText(bus.getDungLuongROM(Integer.parseInt(id)) + "");
     }
 
     /**
@@ -54,7 +59,7 @@ public class ThemRAM extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Thêm");
+        jButton1.setText("Sửa");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -112,13 +117,12 @@ public class ThemRAM extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here: them rom
-        String kichthuoc = jTextField1.getText();
-        int max = busRam.getMaxIDRAM();
-        busRam.insert(new DTO_RamList(max + 1, kichthuoc));
-        JOptionPane.showMessageDialog(null, "Thêm RAM thành công");
-        qlram.listRAM = busRam.getAllData();
-        qlram.filltableram(qlram.listRAM);
+        // TODO add your handling code here: sua ROM
+        int dungluong = Integer.parseInt(jTextField1.getText());
+        bus.update(new DTO_RomList(id, dungluong + ""));
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
+        qlrom.listROM = bus.getAllData();
+        qlrom.filltablerom(qlrom.listROM);
         this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
 
@@ -139,18 +143,22 @@ public class ThemRAM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
-        
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

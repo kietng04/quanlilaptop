@@ -24,15 +24,17 @@ import com.mysql.jdbc.PreparedStatement;
 import BUS.BUS_ChiTietCauHinh;
 import BUS.BUS_Product;
 import BUS.BUS_RamList;
+import BUS.BUS_RomList;
 import ConnectDB.JDBCUtil;
 import DTO.DTO_ChiTietCauHinh;
 import DTO.DTO_RamList;
+import DTO.DTO_RomList;
 
 /**
  *
  * @author Kiet
  */
-public class QuanLyRAM extends javax.swing.JDialog {
+public class QuanLyROM extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewCauHinh
@@ -41,14 +43,14 @@ public class QuanLyRAM extends javax.swing.JDialog {
     BUS_ChiTietCauHinh bus_ChiTietCauHinh = new BUS_ChiTietCauHinh();
     java.awt.Frame parent;
     String currentIDselected = "-1";
-    BUS_RamList bus_RamList = new BUS_RamList();
-    ArrayList<DTO_RamList> listRAM = new ArrayList<>();
-    public QuanLyRAM(java.awt.Frame parent, boolean modal) {
+    BUS_RomList bus_RomList = new BUS_RomList();
+    ArrayList<DTO_RomList> listROM = new ArrayList<>();
+    public QuanLyROM(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
-        listRAM = bus_RamList.getAllData();
-        filltableram(listRAM);
+        listROM = bus_RomList.getAllData();
+        filltablerom(listROM);
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (jTable1.getSelectedRow() > -1) {
@@ -57,14 +59,14 @@ public class QuanLyRAM extends javax.swing.JDialog {
             }
         });
     }
-    public void filltableram(ArrayList<DTO_RamList> listRam) {
+    public void filltablerom(ArrayList<DTO_RomList> listRom) {
         // clear table
         ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
 
-        listRam.forEach((dto) -> {
+        listRom.forEach((dto) -> {
             ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-                dto.getMaram(),
-                dto.getKichThuocRam()
+                dto.getMarom(),
+                dto.getKichThuocRom()
             });
         });
 
@@ -123,6 +125,11 @@ public class QuanLyRAM extends javax.swing.JDialog {
         });
 
         jLabel1.setText("Thêm");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -194,7 +201,7 @@ public class QuanLyRAM extends javax.swing.JDialog {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("QUẢN LÝ RAM");
+        jLabel4.setText("QUẢN LÝ ROM");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,41 +257,49 @@ public class QuanLyRAM extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        ThemRAM themRAM = new ThemRAM(parent, true, this);
-        themRAM.setLocationRelativeTo(null);
-        themRAM.setVisible(true);
+        ThemROM themROM = new ThemROM(parent, true, this);
+        themROM.setLocationRelativeTo(null);
+        themROM.setVisible(true);
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-        // sua
+        // sua ROM
         if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần sửa");
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ROM cần sửa");
             return;
         }
-        SuaRAM suaRAM = new SuaRAM(parent, true, currentIDselected, this);
-        suaRAM.setLocationRelativeTo(null);
-        suaRAM.setVisible(true);
+        SuaROM suaROM = new SuaROM(parent, true, this, currentIDselected);
+        suaROM.setLocationRelativeTo(null);
+        suaROM.setVisible(true);
+        currentIDselected = "-1";
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
-        // xoa
+        // xoa rom
         if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần xóa");
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ROM cần xóa");
             return;
         }
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa RAM này không?", "Title on Box", dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa ROM này không?", "Title on Box", dialogButton);
         if (dialogResult == 0) {
             // sua
-            if (bus_RamList.delete(Integer.parseInt(currentIDselected)) == 1) {
+            if (bus_RomList.delete(Integer.parseInt(currentIDselected)) == 1) {
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
-                listRAM = bus_RamList.getAllData();
-                filltableram(listRAM);
+                listROM = bus_RomList.getAllData();
+                filltablerom(listROM);
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }
         }
     }//GEN-LAST:event_jPanel4MousePressed
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here: them rom
+        ThemROM themROM = new ThemROM(parent, true, this);
+        themROM.setLocationRelativeTo(null);
+        themROM.setVisible(true);
+    }//GEN-LAST:event_jLabel1MousePressed
 
     /**
      * @param args the command line arguments
@@ -303,14 +318,18 @@ public class QuanLyRAM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        //</editor-fold>
+
         //</editor-fold>
 
         //</editor-fold>

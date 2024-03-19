@@ -4,6 +4,11 @@
  */
 package GUI.CRUD;
 
+import javax.swing.JOptionPane;
+
+import BUS.BUS_RamList;
+import DTO.DTO_RamList;
+
 /**
  *
  * @author Kiet
@@ -13,9 +18,15 @@ public class SuaRAM extends javax.swing.JDialog {
     /**
      * Creates new form ThemRAM
      */
-    public SuaRAM(java.awt.Frame parent, boolean modal) {
+    int id;
+    BUS_RamList bus = new BUS_RamList();
+    GUI.CRUD.QuanLyRAM qlram;
+    public SuaRAM(java.awt.Frame parent, boolean modal, String id, GUI.CRUD.QuanLyRAM qlram) {
         super(parent, modal);
+        this.id = Integer.parseInt(id);
+        this.qlram = qlram;
         initComponents();
+        jTextField1.setText(getDungLuongRam(Integer.parseInt(id)) + "");
     }
 
     /**
@@ -104,7 +115,13 @@ public class SuaRAM extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here: sua
+        // TODO add your handling code here: sua ram
+        int dungluong = Integer.parseInt(jTextField1.getText());
+        bus.update(new DTO_RamList(id, dungluong + ""));
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
+        qlram.listRAM = bus.getAllData();
+        qlram.filltableram(qlram.listRAM);
+        this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
@@ -136,18 +153,7 @@ public class SuaRAM extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SuaRAM dialog = new SuaRAM(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,4 +162,8 @@ public class SuaRAM extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public int getDungLuongRam(int id) {
+        return bus.getDungLuongRam(id);
+    }
 }

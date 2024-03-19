@@ -25,4 +25,57 @@ public class BUS_RomList {
     public ArrayList<DTO_RomList> getAllData() {
         return this.listRom;
     }
+
+    public int delete(int id) {
+        int result = rom.delete(id);
+        if (result == 1) {
+            for (DTO_RomList dto : listRom) {
+                if (dto.getMarom() == id) {
+                    listRom.remove(dto);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public int insert(DTO_RomList t) {
+        int result = rom.insert(t);
+        if (result == 1) {
+            listRom.add(t);
+        }
+        return result;
+    }
+
+    public int getMaxIDROM() {
+        int max = 0;
+        for (DTO_RomList dto : listRom) {
+            if (dto.getMarom() > max) {
+                max = dto.getMarom();
+            }
+        }
+        return max;
+    }
+
+    public int update(DTO_RomList t) {
+        int result = rom.update(t);
+        if (result == 1) {
+            for (DTO_RomList dto : listRom) {
+                if (dto.getMarom() == t.getMarom()) {
+                    dto.setKichThuocRom(t.getKichThuocRom());
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public int getDungLuongROM(int id) {
+        for (DTO_RomList dto : listRom) {
+            if (dto.getMarom() == id) {
+                return Integer.parseInt(dto.getKichThuocRom());
+            }
+        }
+        return 0;
+    }
 }

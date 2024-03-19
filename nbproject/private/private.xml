@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/com/raven/suportSwing/ModernScrollBarUI_1.java</file>
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/GUI/Component/InputForm.java</file>
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/com/raven/datechooser/forward.png</file>
@@ -77,6 +78,22 @@
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/HinhAnhSanPham/icons8-budget-65.png</file>
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/BUS/BUS_Kho.java</file>
             <file>file:/C:/Users/KIET/Desktop/Laptop/DoAnJavaSwing/src/DAO/DAO_Product.java</file>
+=======
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/ThemCauHinh.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/SuaRAM.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/Menu/QuanLyThuocTinh.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/AddProducts.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/ThemROM.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/QuanLyThuongHieu.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/ThemRAM.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/Menu/FormItems.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/SuaROM.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/SuaThuongHieu.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/QuanLyROM.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/ThemThuongHieu.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/ViewCauHinh.java</file>
+            <file>file:/C:/Users/Kiet/Desktop/DoAnJavaSwing/src/GUI/CRUD/QuanLyRAM.java</file>
+>>>>>>> 277cce9a8fa03c62e8397103f1be628c5bb5f60f
         </group>
     </open-files>
 </project-private>

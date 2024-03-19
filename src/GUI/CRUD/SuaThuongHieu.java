@@ -13,17 +13,20 @@ import DTO.DTO_RamList;
  *
  * @author Kiet
  */
-public class ThemRAM extends javax.swing.JDialog {
+public class SuaThuongHieu extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemRAM
      */
+    int id;
+    BUS_RamList bus = new BUS_RamList();
     GUI.CRUD.QuanLyRAM qlram;
-    BUS_RamList busRam = new BUS_RamList();
-    public ThemRAM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyRAM qlram) {
+    public SuaThuongHieu(java.awt.Frame parent, boolean modal, String id, GUI.CRUD.QuanLyRAM qlram) {
         super(parent, modal);
+        this.id = Integer.parseInt(id);
         this.qlram = qlram;
         initComponents();
+        jTextField1.setText(getDungLuongRam(Integer.parseInt(id)) + "");
     }
 
     /**
@@ -45,7 +48,7 @@ public class ThemRAM extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Nhập dung lượng RAM (GB)");
+        jLabel1.setText("Sửa tên thương hiệu ");
         jLabel1.setToolTipText("");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +57,7 @@ public class ThemRAM extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Thêm");
+        jButton1.setText("Sửa");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -65,10 +68,6 @@ public class ThemRAM extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -76,8 +75,11 @@ public class ThemRAM extends javax.swing.JDialog {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel1)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,12 +114,11 @@ public class ThemRAM extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here: them rom
-        String kichthuoc = jTextField1.getText();
-        int max = busRam.getMaxIDRAM();
-        busRam.insert(new DTO_RamList(max + 1, kichthuoc));
-        JOptionPane.showMessageDialog(null, "Thêm RAM thành công");
-        qlram.listRAM = busRam.getAllData();
+        // TODO add your handling code here: sua thuong hieu
+        int dungluong = Integer.parseInt(jTextField1.getText());
+        bus.update(new DTO_RamList(id, dungluong + ""));
+        JOptionPane.showMessageDialog(null, "Sửa thành công");
+        qlram.listRAM = bus.getAllData();
         qlram.filltableram(qlram.listRAM);
         this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
@@ -139,18 +140,22 @@ public class ThemRAM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
-        
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -159,4 +164,8 @@ public class ThemRAM extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public int getDungLuongRam(int id) {
+        return bus.getDungLuongRam(id);
+    }
 }
