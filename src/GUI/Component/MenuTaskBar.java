@@ -8,6 +8,8 @@ import DTO.AccountDTO;
 import GUI.MainProgram;
 import GUI.Menu.TrangChu;
 import GUI.Menu.FormItems;
+import GUI.Menu.KhachHang;
+import GUI.Menu.NhaCungCap;
 import GUI.Menu.QuanLyThuocTinh;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -137,6 +139,35 @@ public class MenuTaskBar extends JPanel {
                 main.changePages(qltt);
             }
         });
+        
+        listitem[5].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                // thay quanlythuoctinh thành 
+                KhachHang kh =  new KhachHang(); 
+                main.changePages(kh);
+            }
+        });
+        
+        listitem[8].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                NhaCungCap zx =  new NhaCungCap(); 
+                main.changePages(zx);
+            }
+        });
+        
+         listitem[7].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+               FormItems product = new FormItems();
+                main.changePages(product);
+            }
+        });
+
+
+
+
 
     }
 
@@ -145,7 +176,6 @@ public class MenuTaskBar extends JPanel {
             if (evt.getSource() == listitem[i]) {
                 listitem[i].isSelected = true;
                 listitem[i].setBackground(HowerBackgroundColor);
-
             } else {
                 listitem[i].isSelected = false;
                 listitem[i].setBackground(backgroundItemtaskbar);

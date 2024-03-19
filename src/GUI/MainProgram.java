@@ -104,5 +104,7 @@ public class MainProgram extends JFrame {
         MainContent.repaint();
         MainContent.validate();
     }
+
+  
     
 }

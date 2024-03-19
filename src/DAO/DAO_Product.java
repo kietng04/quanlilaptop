@@ -42,10 +42,12 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
             pst.setString(9, t.getThuonghieu());
             result = pst.executeUpdate();
             JDBCUtil.close(con);
+            
         } catch (SQLException ex) {
             System.out.println("omg");
         }
         return result;
+        
     }
 
     @Override
