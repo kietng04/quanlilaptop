@@ -5,6 +5,9 @@
 package GUI.Menu;
 
 import GUI.CRUD.QuanLyRAM;
+import GUI.CRUD.QuanLyROM;
+import GUI.CRUD.QuanLyThuongHieu;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -109,7 +112,7 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -126,6 +129,12 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel5MousePressed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-brand-128.png"))); // NOI18N
 
@@ -247,7 +256,9 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         // TODO add your handling code here: quan ly rom
-        
+        QuanLyROM qlrom = new QuanLyROM(parent, true);
+        qlrom.setLocationRelativeTo(null);
+        qlrom.setVisible(true);
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
@@ -258,6 +269,13 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
     private void jPanel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseMoved
         // TODO add your handling code here: quan ly he dieu hanh
     }//GEN-LAST:event_jPanel6MouseMoved
+
+    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+        // TODO add your handling code here: quan ly thuong hieu
+        QuanLyThuongHieu qlth = new QuanLyThuongHieu(parent, true);
+        qlth.setLocationRelativeTo(null);
+        qlth.setVisible(true);
+    }//GEN-LAST:event_jPanel5MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

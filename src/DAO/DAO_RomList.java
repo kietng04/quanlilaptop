@@ -24,17 +24,53 @@ public class DAO_RomList implements DAOInterface<DTO_RomList> {
     
     @Override
     public int insert(DTO_RomList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "INSERT INTO `rom`(`MaROM`, `KichThuocRom`, `TrangThai`) VALUES (?,?,1)";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t.getMarom());
+            pst.setString(2, t.getKichThuocRom());
+            pst.execute();
+            JDBCUtil.close(con);
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public int update(DTO_RomList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE `rom` SET `KichThuocRom`=? WHERE `MaROM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t.getKichThuocRom());
+            pst.setInt(2, t.getMarom());
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            System.out.println("loi sua rom");
+            return 0;
+        }
+        return result;
     }
 
     @Override
     public int delete(int t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE `rom` SET `TrangThai`=0 WHERE `MaROM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t);
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            System.out.println("loi xoa rom");
+            return 0;
+        }
+        return result;
     }
 
     @Override

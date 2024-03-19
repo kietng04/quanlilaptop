@@ -21,10 +21,12 @@ import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import BUS.BUS_Brand;
 import BUS.BUS_ChiTietCauHinh;
 import BUS.BUS_Product;
 import BUS.BUS_RamList;
 import ConnectDB.JDBCUtil;
+import DTO.DTO_Brand;
 import DTO.DTO_ChiTietCauHinh;
 import DTO.DTO_RamList;
 
@@ -32,7 +34,7 @@ import DTO.DTO_RamList;
  *
  * @author Kiet
  */
-public class QuanLyRAM extends javax.swing.JDialog {
+public class QuanLyThuongHieu extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewCauHinh
@@ -41,14 +43,14 @@ public class QuanLyRAM extends javax.swing.JDialog {
     BUS_ChiTietCauHinh bus_ChiTietCauHinh = new BUS_ChiTietCauHinh();
     java.awt.Frame parent;
     String currentIDselected = "-1";
-    BUS_RamList bus_RamList = new BUS_RamList();
-    ArrayList<DTO_RamList> listRAM = new ArrayList<>();
-    public QuanLyRAM(java.awt.Frame parent, boolean modal) {
+    BUS_Brand bus_brand = new BUS_Brand();
+    ArrayList<DTO_Brand> listBrand = new ArrayList<>();
+    public QuanLyThuongHieu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
-        listRAM = bus_RamList.getAllData();
-        filltableram(listRAM);
+        listBrand = bus_brand.getAllData();
+        filltablethuonghieu(listBrand);
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (jTable1.getSelectedRow() > -1) {
@@ -57,14 +59,13 @@ public class QuanLyRAM extends javax.swing.JDialog {
             }
         });
     }
-    public void filltableram(ArrayList<DTO_RamList> listRam) {
+    public void filltablethuonghieu(ArrayList<DTO_Brand> listBrand) {
         // clear table
         ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
 
-        listRam.forEach((dto) -> {
+        listBrand.forEach((dto) -> {
             ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-                dto.getMaram(),
-                dto.getKichThuocRam()
+                dto.getBrandName()
             });
         });
 
@@ -103,13 +104,13 @@ public class QuanLyRAM extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Mã RAM", "Dung lượng RAM"
+                "Tên thương hiệu"
             }
         ));
         jTable1.setColumnSelectionAllowed(true);
@@ -194,33 +195,32 @@ public class QuanLyRAM extends javax.swing.JDialog {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("QUẢN LÝ RAM");
+        jLabel4.setText("QUẢN LÝ THƯƠNG HIỆU");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(jLabel4)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(328, 328, 328))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -250,40 +250,41 @@ public class QuanLyRAM extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        ThemRAM themRAM = new ThemRAM(parent, true, this);
-        themRAM.setLocationRelativeTo(null);
-        themRAM.setVisible(true);
+       // them thuong hieu
+       ThemThuongHieu themThuongHieu = new ThemThuongHieu(parent, true, this);
+        themThuongHieu.setLocationRelativeTo(null);
+        themThuongHieu.setVisible(true);
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-        // sua
-        if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần sửa");
-            return;
-        }
-        SuaRAM suaRAM = new SuaRAM(parent, true, currentIDselected, this);
-        suaRAM.setLocationRelativeTo(null);
-        suaRAM.setVisible(true);
+        // sua thuong hieu
+        // if (currentIDselected.equals("-1")) {
+        //     JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần sửa");
+        //     return;
+        // }
+        // SuaRAM suaRAM = new SuaRAM(parent, true, currentIDselected, this);
+        // suaRAM.setLocationRelativeTo(null);
+        // suaRAM.setVisible(true);
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
-        // xoa
-        if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần xóa");
-            return;
-        }
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa RAM này không?", "Title on Box", dialogButton);
-        if (dialogResult == 0) {
-            // sua
-            if (bus_RamList.delete(Integer.parseInt(currentIDselected)) == 1) {
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                listRAM = bus_RamList.getAllData();
-                filltableram(listRAM);
-            } else {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại");
-            }
-        }
+        // xoa thuong hieu
+        // if (currentIDselected.equals("-1")) {
+        //     JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần xóa");
+        //     return;
+        // }
+        // int dialogButton = JOptionPane.YES_NO_OPTION;
+        // int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa RAM này không?", "Title on Box", dialogButton);
+        // if (dialogResult == 0) {
+        //     // sua
+        //     if (bus_brand.delete(Integer.parseInt(currentIDselected)) == 1) {
+        //         JOptionPane.showMessageDialog(this, "Xóa thành công");
+        //         listBrand = bus_brand.getAllData();
+        //         filltableram(bus_brand);
+        //     } else {
+        //         JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        //     }
+        // }
     }//GEN-LAST:event_jPanel4MousePressed
 
     /**
@@ -303,14 +304,18 @@ public class QuanLyRAM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLyRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        //</editor-fold>
+
         //</editor-fold>
 
         //</editor-fold>

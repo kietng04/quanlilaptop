@@ -7,22 +7,24 @@ package GUI.CRUD;
 import javax.swing.JOptionPane;
 
 import BUS.BUS_RamList;
+import BUS.BUS_RomList;
 import DTO.DTO_RamList;
+import DTO.DTO_RomList;
 
 /**
  *
  * @author Kiet
  */
-public class ThemRAM extends javax.swing.JDialog {
+public class ThemROM extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemRAM
      */
-    GUI.CRUD.QuanLyRAM qlram;
-    BUS_RamList busRam = new BUS_RamList();
-    public ThemRAM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyRAM qlram) {
+    GUI.CRUD.QuanLyROM qlrom;
+    BUS_RomList busRom = new BUS_RomList();
+    public ThemROM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyROM qlrom) {
         super(parent, modal);
-        this.qlram = qlram;
+        this.qlrom = qlrom;
         initComponents();
     }
 
@@ -114,11 +116,11 @@ public class ThemRAM extends javax.swing.JDialog {
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here: them rom
         String kichthuoc = jTextField1.getText();
-        int max = busRam.getMaxIDRAM();
-        busRam.insert(new DTO_RamList(max + 1, kichthuoc));
-        JOptionPane.showMessageDialog(null, "Thêm RAM thành công");
-        qlram.listRAM = busRam.getAllData();
-        qlram.filltableram(qlram.listRAM);
+        int max = busRom.getMaxIDROM();
+        busRom.insert(new DTO_RomList(max + 1, kichthuoc));
+        JOptionPane.showMessageDialog(null, "Thêm ROM thành công");
+        qlrom.listROM = busRom.getAllData();
+        qlrom.filltablerom(qlrom.listROM);
         this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
 
@@ -139,14 +141,16 @@ public class ThemRAM extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemRAM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemROM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -159,4 +163,5 @@ public class ThemRAM extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+    
 }
