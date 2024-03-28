@@ -24,7 +24,8 @@ public class JDBCUtil {
 
             result = DriverManager.getConnection(url, name, pass);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !", "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
         }
         return result;
     }
@@ -36,7 +37,6 @@ public class JDBCUtil {
             }
         } catch (SQLException e) {
             // TODO: handle exception
-
         }
     }
 }

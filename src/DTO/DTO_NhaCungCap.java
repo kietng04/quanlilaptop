@@ -15,17 +15,34 @@ public class DTO_NhaCungCap {
     private String tenncc;
     private String diachi;
     private String email;
-    private String sdt;
+    private String sodienthoai;
+    int trangthai;
 
   
-    public DTO_NhaCungCap(int mancc, String tenncc, String diachi, String email, String sdt) {
+  
+    public DTO_NhaCungCap(int mancc, String tenncc, String diachi, String email, String sodienthoai, int trangthai) {
         this.mancc = mancc;
         this.tenncc = tenncc;
         this.diachi = diachi;
         this.email = email;
-        this.sdt = sdt;
+        this.sodienthoai = sodienthoai;
+        this.trangthai = trangthai;
+    }
+    public DTO_NhaCungCap( String tenncc, String diachi, String email, String sodienthoai) {
+        this.tenncc = tenncc;
+        this.diachi = diachi;
+        this.email = email;
+        this.sodienthoai = sodienthoai;
     }
 
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+    
     public int getMancc() {
         return mancc;
     }
@@ -58,12 +75,12 @@ public class DTO_NhaCungCap {
         this.email = email;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getsodienthoai() {
+        return sodienthoai;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setsodienthoai(String sodienthoai) {
+        this.sodienthoai = sodienthoai;
     }
 
     @Override
@@ -73,7 +90,7 @@ public class DTO_NhaCungCap {
         hash = 67 * hash + Objects.hashCode(this.tenncc);
         hash = 67 * hash + Objects.hashCode(this.diachi);
         hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.sdt);
+        hash = 67 * hash + Objects.hashCode(this.sodienthoai);
         return hash;
     }
 
@@ -94,6 +111,6 @@ public class DTO_NhaCungCap {
 
     @Override
     public String toString() {
-        return "NhaCungCap{" + "mancc=" + mancc + ", tenncc=" + tenncc + ", diachi=" + diachi + ", email=" + email + ", sdt=" + sdt + '}';
+        return "NhaCungCap::::{" + "mancc=" + mancc + ", tenncc=" + tenncc + ", diachi=" + diachi + ", email=" + email + ", sodienthoai=" + sodienthoai + '}';
     }
 }

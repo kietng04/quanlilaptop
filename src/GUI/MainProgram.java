@@ -85,7 +85,6 @@ public class MainProgram extends JFrame {
         this.setTitle("HỆ THỐNG QUẢN LÝ BÁN MÁY TÍNH");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuTaskbar = new MenuTaskBar(this, user);
-        
         menuTaskbar.setPreferredSize(new Dimension(250, 1400));
         this.add(menuTaskbar, BorderLayout.WEST);
         MainContent = new JPanel();

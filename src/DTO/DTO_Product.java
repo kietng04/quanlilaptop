@@ -119,4 +119,9 @@ public class DTO_Product {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
+    @Override
+    public String toString() {
+        return "DTO_Product:::::{" + "masanpham=" + masanpham + ", tensanpham=" + tensanpham + ", boxuly=" + boxuly + ", hedieuhanh=" + hedieuhanh + ", vitrikho=" + vitrikho + ", hinhsanpham=" + hinhsanpham + ", thoigianbaohanh=" + thoigianbaohanh + ", trangthai=" + trangthai + ", thuonghieu=" + thuonghieu + ", maLoai=" + maLoai + '}';
+    }
+
 }

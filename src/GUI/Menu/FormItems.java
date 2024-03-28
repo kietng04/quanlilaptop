@@ -39,20 +39,22 @@ import javax.swing.table.DefaultTableModel;
 public final class FormItems extends javax.swing.JPanel {
 
     public BUS_Product productBUS = new BUS_Product();
-    public BUS_Brand brandBUS = new BUS_Brand();
     public ArrayList<DTO_Product> listProducts = productBUS.getAllData();
+    public BUS_Brand brandBUS = new BUS_Brand();
+    
     public ArrayList<DTO_Brand> listBrands = brandBUS.getAllData();
     JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
     int currentIDselected = -1; // khi người dùng ấn vào 1 row trong table và ấn chỉnh sửa, ta sẽ dựa vào ID sản phẩm
     // của row đó để hiển thị thông tin của sản phẩm đó
     
-    
-    
+
     public FormItems() {
         initComponents();
         FillTable(listProducts);
         System.out.println("size" + listProducts.size());
+
         fillComboboxBrand(listBrands);
+        
         // add event click
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -76,6 +78,7 @@ public final class FormItems extends javax.swing.JPanel {
             });
         } 
         
+
         //CAN GIUA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
@@ -138,6 +141,11 @@ public final class FormItems extends javax.swing.JPanel {
         txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSearchFocusGained(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
             }
         });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -461,6 +469,10 @@ public final class FormItems extends javax.swing.JPanel {
         vch.setVisible(true);
         vch.setResizable(false);
     }//GEN-LAST:event_jLabel15MousePressed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
 
 

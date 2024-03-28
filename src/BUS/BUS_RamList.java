@@ -17,7 +17,8 @@ import java.util.ArrayList;
 public class BUS_RamList {
     public DAO_RamList ram = new DAO_RamList();
     private ArrayList<DTO_RamList> listRAM = new ArrayList<>();
-    
+
+
     public BUS_RamList() {
         listRAM = ram.getAllData();
     }

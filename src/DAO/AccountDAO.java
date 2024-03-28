@@ -32,16 +32,22 @@ public class AccountDAO implements DAOInterface<AccountDTO> {
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();
-            while(rs.next()){
+
+            while (rs.next()) {
+
                 int manv = rs.getInt("manv");
                 String tendangnhap = rs.getString("tendangnhap");
                 String matkhau = rs.getString("matkhau");
                 int trangthai = rs.getInt("trangthai");
                 int manhomquyen = rs.getInt("manhomquyen");
                 AccountDTO tk = new AccountDTO(manv, tendangnhap, matkhau, manhomquyen, trangthai);
+                
                 result = tk;
+
             }
+
             JDBCUtil.close(con);
+
         } catch (Exception e) {
         }
         return result;

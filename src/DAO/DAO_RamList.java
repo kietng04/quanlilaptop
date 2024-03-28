@@ -88,6 +88,7 @@ public class DAO_RamList implements DAOInterface<DTO_RamList> {
             JDBCUtil.close(con);
         } catch (Exception e) {
         }
+        
         return result;
     }
 

@@ -12,31 +12,36 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author Kiet
- */
+
 public class LogIn extends JFrame implements KeyListener {
     JPanel pnlMain, pnlLogIn;
     JLabel lblImage, lbl1, lbl2, lbl3, lbl4, lbl5, lbLogin, lbl7;
     InputForm txtUsername, txtPassword;
-
-    public LogIn()  {
+    public LogIn()  {   
        KhoiTaoComponent();
        txtUsername.setText("admin");
        txtPassword.setPass("123456");
     }
-    
     private void KhoiTaoComponent() {
         this.setSize(new Dimension(1000, 460));
         this.setLocationRelativeTo(null);
@@ -134,6 +139,7 @@ public class LogIn extends JFrame implements KeyListener {
     }
     
     public void InitRightPicture() {
+        
         JPanel bo = new JPanel();
         bo.setBorder(new EmptyBorder(0, 15, 15, 15));
         bo.setPreferredSize(new Dimension(500, 740));
@@ -143,12 +149,13 @@ public class LogIn extends JFrame implements KeyListener {
         lblImage = new JLabel(); 
         lblImage.setIcon(new FlatSVGIcon("./img/login.svg"));  
         bo.add(lblImage);
-        
     }
+    
     
     private void pnlLogInMousePressed(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {
         login();
     }
+    
     
     
     @Override
@@ -156,15 +163,18 @@ public class LogIn extends JFrame implements KeyListener {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
     @Override
     public void keyPressed(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-
+    
+    
 }

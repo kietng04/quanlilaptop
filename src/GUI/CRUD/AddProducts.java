@@ -46,7 +46,7 @@ public class AddProducts extends javax.swing.JDialog {
     public BUS_HeDieuHanh hedieuhanh = new BUS_HeDieuHanh();
     public ArrayList<DTO_RamList> listRam = ram.getAllData(); 
     public ArrayList<DTO_RomList> listRom = rom.getAllData();
-    public ArrayList<DTO_Kho> listkho = kho.getAllData();
+    // public ArrayList<DTO_Kho> listkho = kho.getAllData();
     public ArrayList<DTO_Brand> listBrands = brandBUS.getAllData();
     public ArrayList<DTO_HeDieuHanh> listHDH = hedieuhanh.getAllData();
     
@@ -58,7 +58,7 @@ public class AddProducts extends javax.swing.JDialog {
         initComponents();
         loadComboboxRAM(listRam);
         loadComboboxROM(listRom);
-        loadComboboxKho(listkho);
+        // loadComboboxKho(listkho);
         fillComboboxBrand(listBrands);
         loadComboboxHDH(listHDH);
         jTextField13.setText(String.valueOf(productz.getmaloainew()));

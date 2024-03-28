@@ -42,7 +42,7 @@ public class EditProduct extends javax.swing.JDialog {
     public BUS_HeDieuHanh hedieuhanh = new BUS_HeDieuHanh();
     public ArrayList<DTO_RamList> listRam = ram.getAllData(); 
     public ArrayList<DTO_RomList> listRom = rom.getAllData();
-    public ArrayList<DTO_Kho> listkho = kho.getAllData();
+    // public ArrayList<DTO_Kho> listkho = kho.getAllData();
     public ArrayList<DTO_Brand> listBrands = brandBUS.getAllData();
     public ArrayList<DTO_HeDieuHanh> listHDH = hedieuhanh.getAllData();
     public DTO_Product p;
@@ -54,7 +54,7 @@ public class EditProduct extends javax.swing.JDialog {
         jTextField16.setText(p.getTensanpham() + "");
         jTextField17.setText(p.getBoxuly() + "");
         loadComboboxHDH(listHDH);
-        loadComboboxKho(listkho);
+        // loadComboboxKho(listkho);
         fillComboboxBrand(listBrands);
         jComboBox16.setSelectedItem(p.getHedieuhanh());
         jComboBox15.setSelectedItem(p.getThuonghieu());

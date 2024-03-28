@@ -4,20 +4,72 @@
  */
 package GUI.Menu;
 
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import BUS.BUS_Brand;
+import BUS.BUS_NhaCungCap;
+import BUS.BUS_Product;
+import DTO.DTO_NhaCungCap;
+import DTO.DTO_Product;
+import GUI.CRUD.SuaNhaCungCap;
 import GUI.CRUD.ThemNhaCungCapCURD;
+import GUI.CRUD.XemNhaCungCap;
 
 /**
  *
  * @author KIET
  */
 public class NhaCungCap extends javax.swing.JPanel {
-
+    
+    public BUS_NhaCungCap busncc = new BUS_NhaCungCap();
+    public ArrayList<DTO_NhaCungCap> listncc = busncc.getAllData();
+    private DTO_NhaCungCap nccDTO;
+    DefaultTableModel model;
     /**
      * Creates new form NhaCungCap
      */
     public NhaCungCap() {
         initComponents();
+        loadTable(listncc);
     }
+
+    public int getRowSelected() {
+        int index = jTable1.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà cung cấp");
+        }
+        return index;
+    }
+
+    public void loadTable(ArrayList<DTO_NhaCungCap> list) {
+    model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear the table
+    
+        for (DTO_NhaCungCap ncc : list) {
+            Object[] row = new Object[] {
+                ncc.getMancc(),
+                ncc.getTenncc(),
+                ncc.getDiachi(),
+                ncc.getEmail(),
+                ncc.getsodienthoai(),
+                // Add more fields as necessary
+            };
+    
+            model.addRow(row);
+        }
+    
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,13 +261,14 @@ public class NhaCungCap extends javax.swing.JPanel {
                     .addComponent(jLabel7NCC)
                     .addComponent(jLabel4NCC, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton4)
+                        .addComponent(jButton5)
+                        .addComponent(jButton6)
+                        .addComponent(jButton7)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -256,26 +309,22 @@ public class NhaCungCap extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(215, 215, 215)
-                                .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(txtSearchNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jComboBoxNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(myButton1NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(myButton2NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1253, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -287,7 +336,7 @@ public class NhaCungCap extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtSearchNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBoxNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(myButton1NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(myButton2NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,7 +369,9 @@ public class NhaCungCap extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchNCCFocusGained
 
     private void txtSearchNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNCCActionPerformed
-        // TODO add your handling code here:
+                // TODO add your handling code here:
+                
+        
     }//GEN-LAST:event_txtSearchNCCActionPerformed
 
     private void txtSearchNCCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNCCKeyReleased
@@ -368,23 +419,68 @@ public class NhaCungCap extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel7NCCMousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        int index = getRowSelected();
+        if (index == -1) {
+            return;
+        }
+        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
+        int maNCC = jTable1.getValueAt(index, 0).hashCode();
+        String tenNCC = jTable1.getValueAt(index, 1).toString();
+        String diaChi = jTable1.getValueAt(index, 2).toString();
+        String email = jTable1.getValueAt(index, 3).toString();
+        String sdt = jTable1.getValueAt(index, 4).toString();
+        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
+        SuaNhaCungCap suancc = new SuaNhaCungCap();
+        suancc.setNccDTO(nccDTO);
+        suancc.setTextField();
+        suancc.setLocationRelativeTo(null);
+        suancc.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: Xoa
+        int index = jTable1.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần xóa");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+          if (confirm == JOptionPane.YES_OPTION) {
+            int id = (int) jTable1.getValueAt(index, 0);
+            busncc.delete(id);
+            JOptionPane.showMessageDialog(null, "Xóa nhà cung cấp thành công");
+            loadTable(busncc.getAllData());
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         System.out.println("Button 4 được nhấn!");
         ThemNhaCungCapCURD themNhaCungCapFrame = new ThemNhaCungCapCURD();
+        themNhaCungCapFrame.setLocationRelativeTo(null);
         themNhaCungCapFrame.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        int index = getRowSelected();
+        if (index == -1) {
+            return;
+        }
+        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
+        int maNCC = jTable1.getValueAt(index, 0).hashCode();
+        String tenNCC = jTable1.getValueAt(index, 1).toString();
+        String diaChi = jTable1.getValueAt(index, 2).toString();
+        String email = jTable1.getValueAt(index, 3).toString();
+        String sdt = jTable1.getValueAt(index, 4).toString();
+        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
+        XemNhaCungCap xemncc = new XemNhaCungCap();
+        xemncc.setNccDTO(nccDTO);
+        xemncc.setTextField();
+        xemncc.setLocationRelativeTo(null);
+        xemncc.setVisible(true);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

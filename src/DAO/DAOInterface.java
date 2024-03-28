@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Kiet
  * @param <T>
  */
+
 public interface DAOInterface<T> {
     public int insert(T t);
     
@@ -21,7 +22,6 @@ public interface DAOInterface<T> {
     public ArrayList<T> getAllData();
     
     public T selectById(String t);
-    
     
     int getAutoIncrement();
 }

@@ -14,10 +14,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kiet
  */
+
 public class DAO_Product implements DAOInterface<DTO_Product>{
     
     public static DAO_Product getInstance() {
@@ -116,6 +119,7 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
             JDBCUtil.close(con);
         } catch (Exception e) {
         }
+        JOptionPane.showMessageDialog(null, "Nội dung của listProduct: " + result);
         return result;
     }
 
