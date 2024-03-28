@@ -4,6 +4,7 @@
  */
 package GUI.Menu;
 
+import GUI.CRUD.QuanLyHDH;
 import GUI.CRUD.QuanLyRAM;
 import GUI.CRUD.QuanLyROM;
 import GUI.CRUD.QuanLyThuongHieu;
@@ -168,9 +169,9 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
-        jPanel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel6MouseMoved(evt);
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel6MousePressed(evt);
             }
         });
 
@@ -266,16 +267,19 @@ public class QuanLyThuocTinh extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jLabel6MousePressed
 
-    private void jPanel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseMoved
-        // TODO add your handling code here: quan ly he dieu hanh
-    }//GEN-LAST:event_jPanel6MouseMoved
-
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         // TODO add your handling code here: quan ly thuong hieu
         QuanLyThuongHieu qlth = new QuanLyThuongHieu(parent, true);
         qlth.setLocationRelativeTo(null);
         qlth.setVisible(true);
     }//GEN-LAST:event_jPanel5MousePressed
+
+    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
+        // TODO add your handling code here: quan ly hdh
+        QuanLyHDH qlhdh = new QuanLyHDH(parent, true);
+        qlhdh.setLocationRelativeTo(null);
+        qlhdh.setVisible(true);
+    }//GEN-LAST:event_jPanel6MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

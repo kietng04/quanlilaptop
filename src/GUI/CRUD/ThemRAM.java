@@ -20,6 +20,7 @@ public class ThemRAM extends javax.swing.JDialog {
      */
     GUI.CRUD.QuanLyRAM qlram;
     BUS_RamList busRam = new BUS_RamList();
+    
     public ThemRAM(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyRAM qlram) {
         super(parent, modal);
         this.qlram = qlram;
@@ -114,6 +115,14 @@ public class ThemRAM extends javax.swing.JDialog {
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here: them rom
         String kichthuoc = jTextField1.getText();
+        if (kichthuoc.equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập dung lượng RAM");
+            return;
+        }
+        if (busRam.checkRAM(kichthuoc)) {
+            JOptionPane.showMessageDialog(null, "RAM đã tồn tại");
+            return;
+        }
         int max = busRam.getMaxIDRAM();
         busRam.insert(new DTO_RamList(max + 1, kichthuoc));
         JOptionPane.showMessageDialog(null, "Thêm RAM thành công");

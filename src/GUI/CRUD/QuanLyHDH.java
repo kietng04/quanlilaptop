@@ -23,18 +23,20 @@ import com.mysql.jdbc.PreparedStatement;
 
 import BUS.BUS_Brand;
 import BUS.BUS_ChiTietCauHinh;
+import BUS.BUS_HeDieuHanh;
 import BUS.BUS_Product;
 import BUS.BUS_RamList;
 import ConnectDB.JDBCUtil;
 import DTO.DTO_Brand;
 import DTO.DTO_ChiTietCauHinh;
+import DTO.DTO_HeDieuHanh;
 import DTO.DTO_RamList;
 
 /**
  *
  * @author Kiet
  */
-public class QuanLyThuongHieu extends javax.swing.JDialog {
+public class QuanLyHDH extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewCauHinh
@@ -43,14 +45,14 @@ public class QuanLyThuongHieu extends javax.swing.JDialog {
     BUS_ChiTietCauHinh bus_ChiTietCauHinh = new BUS_ChiTietCauHinh();
     java.awt.Frame parent;
     String currentIDselected = "-1";
-    BUS_Brand bus_brand = new BUS_Brand();
-    ArrayList<DTO_Brand> listBrand = new ArrayList<>();
-    public QuanLyThuongHieu(java.awt.Frame parent, boolean modal) {
+    BUS_HeDieuHanh bus = new BUS_HeDieuHanh();
+    ArrayList<DTO_HeDieuHanh> listHDH = new ArrayList<>();
+    public QuanLyHDH(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
-        listBrand = bus_brand.getAllData();
-        filltablethuonghieu(listBrand);
+        listHDH = bus.getAllData();
+        filltableHDH(listHDH);
         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (jTable1.getSelectedRow() > -1) {
@@ -59,13 +61,13 @@ public class QuanLyThuongHieu extends javax.swing.JDialog {
             }
         });
     }
-    public void filltablethuonghieu(ArrayList<DTO_Brand> listBrand) {
+    public void filltableHDH(ArrayList<DTO_HeDieuHanh> listHDH) {
         // clear table
         ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
 
-        listBrand.forEach((dto) -> {
+        listHDH.forEach((dto) -> {
             ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-                dto.getBrandName()
+                dto.getMahdh(), dto.getTenhdh()
             });
         });
 
@@ -110,7 +112,7 @@ public class QuanLyThuongHieu extends javax.swing.JDialog {
                 {null}
             },
             new String [] {
-                "Tên thương hiệu"
+                "Mã thương hiệu" ,"Tên thương hiệu"
             }
         ));
         jTable1.setColumnSelectionAllowed(true);
@@ -251,26 +253,41 @@ public class QuanLyThuongHieu extends javax.swing.JDialog {
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
        // them thuong hieu
-       ThemThuongHieu themThuongHieu = new ThemThuongHieu(parent, true, this);
-        themThuongHieu.setLocationRelativeTo(null);
-        themThuongHieu.setVisible(true);
+       ThemHDH themHDH = new ThemHDH(parent, true, this);
+        themHDH.setLocationRelativeTo(null);
+        themHDH.setVisible(true);
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
         // sua thuong hieu
-        if (currentIDselected.equals("-1")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần sửa");
-            return;
-        }
-        SuaThuongHieu suaThuongHieu = new SuaThuongHieu(parent, true, currentIDselected, this);
-        suaThuongHieu.setLocationRelativeTo(null);
-        suaThuongHieu.setVisible(true);
+//        if (currentIDselected.equals("-1")) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần sửa");
+//            return;
+//        }
+//        SuaThuongHieu suaThuongHieu = new SuaThuongHieu(parent, true, currentIDselected, this);
+//        suaThuongHieu.setLocationRelativeTo(null);
+//        suaThuongHieu.setVisible(true);
         
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         // xoa thuong hieu
-        // if 
+        // if (currentIDselected.equals("-1")) {
+        //     JOptionPane.showMessageDialog(this, "Vui lòng chọn RAM cần xóa");
+        //     return;
+        // }
+        // int dialogButton = JOptionPane.YES_NO_OPTION;
+        // int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa RAM này không?", "Title on Box", dialogButton);
+        // if (dialogResult == 0) {
+        //     // sua
+        //     if (bus_brand.delete(Integer.parseInt(currentIDselected)) == 1) {
+        //         JOptionPane.showMessageDialog(this, "Xóa thành công");
+        //         listBrand = bus_brand.getAllData();
+        //         filltableram(bus_brand);
+        //     } else {
+        //         JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        //     }
+        // }
     }//GEN-LAST:event_jPanel4MousePressed
 
     /**
@@ -290,14 +307,22 @@ public class QuanLyThuongHieu extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLyThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        //</editor-fold>
+
+        //</editor-fold>
+
+        //</editor-fold>
+
         //</editor-fold>
 
         //</editor-fold>

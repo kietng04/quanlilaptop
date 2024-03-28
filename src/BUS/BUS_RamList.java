@@ -78,4 +78,13 @@ public class BUS_RamList {
         }
         return result;
     }
+
+    public boolean checkRAM(String kichthuoc) {
+        for (DTO_RamList dto : listRAM) {
+            if (dto.getKichThuocRam().equals(kichthuoc)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

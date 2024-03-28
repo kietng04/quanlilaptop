@@ -46,9 +46,10 @@ public class EditProduct extends javax.swing.JDialog {
     public ArrayList<DTO_Brand> listBrands = brandBUS.getAllData();
     public ArrayList<DTO_HeDieuHanh> listHDH = hedieuhanh.getAllData();
     public DTO_Product p;
-    
-    public EditProduct(JFrame jFrame, boolean b, int id) {
+    GUI.Menu.FormItems formItems;
+    public EditProduct(JFrame jFrame, boolean b, int id, GUI.Menu.FormItems formItems) {
         initComponents();
+        this.formItems = formItems;
         p = productz.getProductByID(id);
         jTextField13.setText(p.getMasanpham() + "");
         jTextField16.setText(p.getTensanpham() + "");
@@ -1278,7 +1279,9 @@ public class EditProduct extends javax.swing.JDialog {
 
     private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
         editProduct();
-        productz.update(p);
+        formItems.productBUS.update(p);
+        formItems.listProducts = formItems.productBUS.getAllData();
+        formItems.FillTable(formItems.listProducts);
         JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công");
         this.dispose();
     

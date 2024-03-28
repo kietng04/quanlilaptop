@@ -42,12 +42,33 @@ public class DAO_Brand implements DAOInterface<DTO_Brand> {
      
     @Override
     public int insert(DTO_Brand t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "INSERT INTO thuonghieu(tenthuonghieu, trangthai) VALUES (?, 1)";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t.getBrandName());
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            
+        }
+        return result;
     }
 
     @Override
     public int update(DTO_Brand t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // int result = 0;
+        // try {
+        //     Connection con = (Connection) JDBCUtil.getConnectDB();
+        //     String sql = "UPDATE thuonghieu SET tenthuonghieu = ? WHERE tenthuonghieu = ?";
+        //     PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+        //     pst.setString(1, t.getBrandName());
+        //     result = pst.executeUpdate();
+        //     JDBCUtil.close(con);
+        // } catch (Exception e) {
+        // }
+        return 0;
     }
 
     @Override
@@ -65,4 +86,18 @@ public class DAO_Brand implements DAOInterface<DTO_Brand> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public int updatez(String currentBrand, String newBrand) {
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE thuonghieu SET tenthuonghieu = ? WHERE tenthuonghieu = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, newBrand);
+            pst.setString(2, currentBrand);
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return result;
+    }
 }
