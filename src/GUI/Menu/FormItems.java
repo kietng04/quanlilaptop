@@ -438,7 +438,7 @@ public final class FormItems extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(parent, "Vui lòng chọn sản phẩm để chỉnh sửa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        EditProduct add = new EditProduct(parent, true, currentIDselected);
+        EditProduct add = new EditProduct(parent, true, currentIDselected, this);
         add.setLocationRelativeTo(null); 
         add.setVisible(true);
     }//GEN-LAST:event_jLabel1MousePressed

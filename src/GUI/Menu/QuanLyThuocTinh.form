@@ -253,7 +253,7 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Events>
-            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jPanel6MouseMoved"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel6MousePressed"/>
           </Events>
 
           <Layout>

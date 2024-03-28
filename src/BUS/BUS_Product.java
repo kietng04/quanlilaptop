@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class BUS_Product {
     public DAO_Product product = new DAO_Product();
     
+
     public BUS_Product() {
 
     }

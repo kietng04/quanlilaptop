@@ -18,4 +18,9 @@ public class DTO_Brand {
     public String getBrandName() {
         return namebrand;
     }
+
+    public void setBrandName(String namebrand) {
+        this.namebrand = namebrand;
+    }
+    
 }

@@ -6,25 +6,26 @@ package GUI.CRUD;
 
 import javax.swing.JOptionPane;
 
-import BUS.BUS_Brand;
+import BUS.BUS_HeDieuHanh;
 import BUS.BUS_RamList;
-import DTO.DTO_Brand;
+import DTO.DTO_HeDieuHanh;
 import DTO.DTO_RamList;
 
 /**
  *
  * @author Kiet
  */
-public class ThemThuongHieu extends javax.swing.JDialog {
+public class ThemHDH extends javax.swing.JDialog {
 
     /**
      * Creates new form ThemRAM
      */
-    GUI.CRUD.QuanLyThuongHieu qlth;
-    BUS_Brand busBrand = new BUS_Brand();
-    public ThemThuongHieu(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyThuongHieu qlth) {
+    GUI.CRUD.QuanLyHDH qlhdh;
+    BUS_HeDieuHanh bushdh = new BUS_HeDieuHanh();
+    String currentIDSelected = "-1";
+    public ThemHDH(java.awt.Frame parent, boolean modal, GUI.CRUD.QuanLyHDH qlhdh) {
         super(parent, modal);
-        this.qlth = qlth;
+        this.qlhdh = qlhdh;
         initComponents();
     }
 
@@ -47,7 +48,7 @@ public class ThemThuongHieu extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Nhập tên thương hiệu");
+        jLabel1.setText("Nhập dung lượng RAM (GB)");
         jLabel1.setToolTipText("");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,24 +68,25 @@ public class ThemThuongHieu extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel1)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addGap(95, 95, 95)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -113,22 +115,18 @@ public class ThemThuongHieu extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        // TODO add your handling code here: them thuong hieu
-        String tenTH = jTextField1.getText();
-        if (tenTH.equals("")) {
-            JOptionPane.showMessageDialog(null, "Tên thương hiệu không được để trống");
-            return;
+        // TODO add your handling code here: them hdh
+        try {
+            DTO_HeDieuHanh hdh = new DTO_HeDieuHanh(bushdh.getMaxIDHDH() + 1, jTextField1.getText());
+            bushdh.insert(hdh);
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            qlhdh.listHDH = bushdh.getAllData();
+            qlhdh.filltableHDH(qlhdh.listHDH);
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            e.printStackTrace();
         }
-        if (busBrand.checkBrandName(tenTH)) {
-            JOptionPane.showMessageDialog(null, "Tên thương hiệu đã tồn tại");
-            return;
-        }
-        DTO_Brand th = new DTO_Brand(tenTH);
-        busBrand.addBrand(th);
-        qlth.listBrand = busBrand.getAllData();
-        qlth.filltablethuonghieu(qlth.listBrand);
-        JOptionPane.showMessageDialog(null, "Thêm thành công");
-        this.dispose();
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
@@ -148,13 +146,13 @@ public class ThemThuongHieu extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemThuongHieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemHDH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

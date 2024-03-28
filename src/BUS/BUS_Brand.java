@@ -25,4 +25,33 @@ public class BUS_Brand {
     public ArrayList<DTO_Brand> getAllData() {
         return this.listBrand;
     }
+
+    public int addBrand(DTO_Brand t) {
+        int result = brand.insert(t);
+        if (result == 1) {
+            listBrand.add(t);
+        }
+        return result;
+    }  
+
+    public boolean checkBrandName(String brand) {
+        for (DTO_Brand dto : listBrand) {
+            if (dto.getBrandName().equals(brand)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int editbrand(String tenth, String newten) {
+        int result = brand.updatez(tenth, newten);
+        if (result == 1) {
+            for (DTO_Brand dto : listBrand) {
+                if (dto.getBrandName() == tenth) {
+                    dto.setBrandName(newten);
+                }
+            }
+        }
+        return result;
+    }
 }

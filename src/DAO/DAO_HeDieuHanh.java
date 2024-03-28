@@ -21,7 +21,19 @@ public class DAO_HeDieuHanh implements DAOInterface<DTO_HeDieuHanh> {
 
     @Override
     public int insert(DTO_HeDieuHanh t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "INSERT INTO hedieuhanh(MaHDH, TenHDH, TrangThai) VALUES (?, ?, 1)";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t.getMahdh());
+            pst.setString(2, t.getTenhdh());
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            System.out.println("loi add hdh");
+        }
+        return result;
     }
 
     @Override

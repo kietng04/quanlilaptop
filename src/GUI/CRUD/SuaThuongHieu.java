@@ -6,7 +6,9 @@ package GUI.CRUD;
 
 import javax.swing.JOptionPane;
 
+import BUS.BUS_Brand;
 import BUS.BUS_RamList;
+import DTO.DTO_Brand;
 import DTO.DTO_RamList;
 
 /**
@@ -18,15 +20,15 @@ public class SuaThuongHieu extends javax.swing.JDialog {
     /**
      * Creates new form ThemRAM
      */
-    int id;
-    BUS_RamList bus = new BUS_RamList();
-    GUI.CRUD.QuanLyRAM qlram;
-    public SuaThuongHieu(java.awt.Frame parent, boolean modal, String id, GUI.CRUD.QuanLyRAM qlram) {
+    String tenth;
+    BUS_Brand bus = new BUS_Brand();
+    GUI.CRUD.QuanLyThuongHieu qlth;
+    public SuaThuongHieu(java.awt.Frame parent, boolean modal, String tenth, GUI.CRUD.QuanLyThuongHieu qlth) {
         super(parent, modal);
-        this.id = Integer.parseInt(id);
-        this.qlram = qlram;
+        this.tenth = tenth;
+        this.qlth = qlth;
         initComponents();
-        jTextField1.setText(getDungLuongRam(Integer.parseInt(id)) + "");
+        jTextField1.setText(tenth);
     }
 
     /**
@@ -115,12 +117,16 @@ public class SuaThuongHieu extends javax.swing.JDialog {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here: sua thuong hieu
-        int dungluong = Integer.parseInt(jTextField1.getText());
-        bus.update(new DTO_RamList(id, dungluong + ""));
-        JOptionPane.showMessageDialog(null, "Sửa thành công");
-        qlram.listRAM = bus.getAllData();
-        qlram.filltableram(qlram.listRAM);
-        this.dispose();
+        String thuonghieu = jTextField1.getText();
+        if (thuonghieu.equals("")) {
+            JOptionPane.showMessageDialog(null, "Dung lượng không được để trống");
+            return;
+        }
+        if (bus.checkBrandName(thuonghieu)) {
+            JOptionPane.showMessageDialog(null, "Dung lượng đã tồn tại");
+            return;
+        }
+        bus.editbrand(tenth, thuonghieu);
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
@@ -164,8 +170,4 @@ public class SuaThuongHieu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
-    public int getDungLuongRam(int id) {
-        return bus.getDungLuongRam(id);
-    }
 }

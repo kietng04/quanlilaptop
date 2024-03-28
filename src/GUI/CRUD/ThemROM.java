@@ -116,6 +116,14 @@ public class ThemROM extends javax.swing.JDialog {
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here: them rom
         String kichthuoc = jTextField1.getText();
+        if (kichthuoc.equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin");
+            return;
+        }
+        if (busRom.checkROM(kichthuoc)) {
+            JOptionPane.showMessageDialog(null, "ROM đã tồn tại");
+            return;
+        }
         int max = busRom.getMaxIDROM();
         busRom.insert(new DTO_RomList(max + 1, kichthuoc));
         JOptionPane.showMessageDialog(null, "Thêm ROM thành công");

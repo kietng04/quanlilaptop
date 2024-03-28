@@ -78,4 +78,13 @@ public class BUS_RomList {
         }
         return 0;
     }
+
+    public boolean checkROM(String kichthuoc) {
+        for (DTO_RomList dto : listRom) {
+            if (dto.getKichThuocRom().equals(kichthuoc)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
