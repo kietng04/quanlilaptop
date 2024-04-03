@@ -34,14 +34,17 @@ import javax.swing.border.EmptyBorder;
 
 
 public class LogIn extends JFrame implements KeyListener {
+
     JPanel pnlMain, pnlLogIn;
     JLabel lblImage, lbl1, lbl2, lbl3, lbl4, lbl5, lbLogin, lbl7;
     InputForm txtUsername, txtPassword;
-    public LogIn()  {   
-       KhoiTaoComponent();
-       txtUsername.setText("admin");
-       txtPassword.setPass("123456");
+
+    public LogIn() {
+        KhoiTaoComponent();
+        txtUsername.setText("admin");
+        txtPassword.setPass("123456");
     }
+    
     private void KhoiTaoComponent() {
         this.setSize(new Dimension(1000, 460));
         this.setLocationRelativeTo(null);

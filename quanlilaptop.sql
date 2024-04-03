@@ -41,6 +41,32 @@ VALUES (1, 'LÁP TÓP GA MINH', 'warning.png', 'I9 202444', 'MAC OS', '1 năm', 
 (5, 'Laptop Dell Inspiron 15', 'warning.png', ' i7 1355U', 'Win 10', '1 năm', 'DI15', 'Kho A', 'Dell', 1),
 (6, 'Laptop Dell Inspiron 14', 'warning.png', ' i5 11400H', 'Win 10', '1 năm', 'DI14', 'Kho A', 'Dell', 1);
 
+--
+-- Table structure for table `nhanvien`
+--
+
+CREATE TABLE `nhanvien` (
+  `manv` int(11) NOT NULL,
+  `hoten` varchar(255) NOT NULL,
+  `gioitinh` int(11) NOT NULL,
+  `ngaysinh` date NOT NULL,
+  `sdt` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `trangthai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`manv`, `hoten`, `gioitinh`, `ngaysinh`, `sdt`, `email`, `trangthai`) VALUES
+(1, 'Phạm Văn Kiệt', 1, '2004-12-20', '0976204879', 'phamvankietgmail.com', 1),
+(2, 'Nguyễn Phan Tuấn Kiệt', 1, '2004-04-11', '0355374322', 'nguyenphantuankiet@gmail.com', 1),
+(3, 'Nguyễn Thế Kiên', 0, '2004-04-11', '0123456789', 'nguyenthekien@gmail.com', 1),
+(4, 'Nguyễn Trung Hưng', 0, '2004-04-03', '0123456789', 'hunggaylo@gmail.com', 1),
+(5, 'Huỳnh Minh Phúc', 1, '2004-05-06', '0123456789', 'minhphuc@gmail.com', 1),
+(6, 'Diệp Thụy An', 1, '2004-05-06', '0123456789', 'thuyan@gmail.com', 1);
+
 
 
 CREATE TABLE `phienbansanpham` (
