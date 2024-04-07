@@ -4,36 +4,18 @@
  */
 package GUI.CRUD;
 
-import BUS.BUS_NhanVien;
-import DAO.DAO_NhanVien;
-import DTO.DTO_NhanVien;
-import com.toedter.calendar.JDateChooser;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author KIET
  */
-public class ThemNhanVienDialog extends javax.swing.JDialog {
-
-    public BUS_NhanVien busnv = new BUS_NhanVien();
-    GUI.Menu.NhanVien ap;
- 
-    
-    
+public class SuaNhanVienDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form ThemNhanVienDialog
+     * Creates new form SuaNhanVienDialog
      */
-    public ThemNhanVienDialog(java.awt.Frame parent, boolean modal, GUI.Menu.NhanVien ap) {
+    public SuaNhanVienDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-      
-        this.ap = ap;
         initComponents();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        jDateChooser1.setDateFormatString(sdf.toPattern());
     }
 
     /**
@@ -45,14 +27,6 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -67,17 +41,6 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
         jRadioButton2 = new javax.swing.JRadioButton();
         jTextField3 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,24 +62,24 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel7.setText("THÊM NHÀ NHÂN VIÊN MỚI");
+        jLabel7.setText("SỬA THÔNG TIN NHÂN VIÊN ");
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 255));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel1.setText("Nhập tên:");
+        jLabel1.setText("Nhập lại tên:");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel2.setText("Nhập Email:");
+        jLabel2.setText("Nhập lại Email:");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel3.setText("Nhập ngày sinh:");
+        jLabel3.setText("Nhập lại ngày sinh:");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel4.setText("Nhập số điện thoại:");
+        jLabel4.setText("Nhập lại số điện thoại:");
 
         jButton1.setBackground(new java.awt.Color(51, 255, 0));
         jButton1.setText("THÊM");
@@ -127,7 +90,6 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
         });
 
         jRadioButton1.setBackground(new java.awt.Color(204, 255, 255));
-        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Nam");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +98,6 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
         });
 
         jRadioButton2.setBackground(new java.awt.Color(204, 255, 255));
-        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Nữ");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,13 +122,13 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +138,7 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,30 +202,7 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        String ten = jTextField1.getText(); 
-        String email = jTextField2.getText();
-        String sdt = jTextField3.getText();
-        Date ngaysinh = jDateChooser1.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = sdf.format(ngaysinh);
-        int gioitinh = 0;
-        if (jRadioButton1.isSelected()) {
-            gioitinh = 1;
-        }
-        if (jRadioButton2.isSelected()) {
-            gioitinh = 0;
-        }
-        java.sql.Date sqlDate = new java.sql.Date(ngaysinh.getTime());
-        int manv = DAO_NhanVien.getInstance().getAutoIncrement();
-        
-        DTO_NhanVien nv = new DTO_NhanVien(manv, ten, gioitinh, sqlDate, sdt, email, 1);
-        busnv.insert(nv);
-        ap.listnv = ap.busnv.getAllData();
-        ap.loadTable(ap.listnv);
-        JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công"+ nv);
-        
-        this.dispose();
-
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -296,26 +234,32 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaNhanVienDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SuaNhanVienDialog dialog = new SuaNhanVienDialog(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -324,7 +268,6 @@ public class ThemNhanVienDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

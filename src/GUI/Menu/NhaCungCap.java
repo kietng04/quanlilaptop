@@ -27,7 +27,6 @@ public class NhaCungCap extends javax.swing.JPanel {
     
     public BUS_NhaCungCap busncc = new BUS_NhaCungCap();
     public ArrayList<DTO_NhaCungCap> listncc = busncc.getAllData();
-    private DTO_NhaCungCap nccDTO;
     DefaultTableModel model;
     /**
      * Creates new form NhaCungCap
@@ -38,7 +37,7 @@ public class NhaCungCap extends javax.swing.JPanel {
     }
 
     public int getRowSelected() {
-        int index = jTable1.getSelectedRow();
+        int index = jTable2.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà cung cấp");
         }
@@ -46,7 +45,7 @@ public class NhaCungCap extends javax.swing.JPanel {
     }
 
     public void loadTable(ArrayList<DTO_NhaCungCap> list) {
-    model = (DefaultTableModel) jTable1.getModel();
+    model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0); // Clear the table
     
         for (DTO_NhaCungCap ncc : list) {
@@ -65,7 +64,7 @@ public class NhaCungCap extends javax.swing.JPanel {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         for (int i = 0; i < model.getColumnCount(); i++) {
-            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
     }
     
@@ -85,7 +84,7 @@ public class NhaCungCap extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         txtSearchNCC = new com.raven.suportSwing.TextField();
@@ -116,6 +115,8 @@ public class NhaCungCap extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jLabel1NCC = new javax.swing.JLabel();
 
+        setLayout(new java.awt.BorderLayout());
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         lblSearch.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
@@ -136,7 +137,7 @@ public class NhaCungCap extends javax.swing.JPanel {
 
         jPanel13.setBackground(new java.awt.Color(255, 204, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -144,10 +145,10 @@ public class NhaCungCap extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã ncc", "Tên ncc", "Dia chi", "Email", "So Dien Thoai"
+                "Mã ncc", "Tên ncc", "Dia chi", "Gioi Tinh", "So Dien Thoai"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable2);
 
         jPanel12.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -573,22 +574,7 @@ public class NhaCungCap extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(3004, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -617,11 +603,11 @@ public class NhaCungCap extends javax.swing.JPanel {
             return;
         }
         // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable1.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable1.getValueAt(index, 1).toString();
-        String diaChi = jTable1.getValueAt(index, 2).toString();
-        String email = jTable1.getValueAt(index, 3).toString();
-        String sdt = jTable1.getValueAt(index, 4).toString();
+        int maNCC = jTable2.getValueAt(index, 0).hashCode();
+        String tenNCC = jTable2.getValueAt(index, 1).toString();
+        String diaChi = jTable2.getValueAt(index, 2).toString();
+        String email = jTable2.getValueAt(index, 3).toString();
+        String sdt = jTable2.getValueAt(index, 4).toString();
         DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
         XemNhaCungCapDialog xemncc = new XemNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO);
         xemncc.setLocationRelativeTo(null);
@@ -630,13 +616,13 @@ public class NhaCungCap extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: Xoa
-        int index = jTable1.getSelectedRow();
+        int index = jTable2.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần xóa");
         } else {
             int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                int id = (int) jTable1.getValueAt(index, 0);
+                int id = (int) jTable2.getValueAt(index, 0);
                 busncc.delete(id);
                 JOptionPane.showMessageDialog(null, "Xóa nhà cung cấp thành công");
                 loadTable(busncc.getAllData());
@@ -661,11 +647,11 @@ public class NhaCungCap extends javax.swing.JPanel {
             return;
         }
         // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable1.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable1.getValueAt(index, 1).toString();
-        String diaChi = jTable1.getValueAt(index, 2).toString();
-        String email = jTable1.getValueAt(index, 3).toString();
-        String sdt = jTable1.getValueAt(index, 4).toString();
+        int maNCC = jTable2.getValueAt(index, 0).hashCode();
+        String tenNCC = jTable2.getValueAt(index, 1).toString();
+        String diaChi = jTable2.getValueAt(index, 2).toString();
+        String email = jTable2.getValueAt(index, 3).toString();
+        String sdt = jTable2.getValueAt(index, 4).toString();
         DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
         SuaNhaCungCapDialog suaNCC = new SuaNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO, this);
         suaNCC.setLocationRelativeTo(null);
@@ -754,7 +740,7 @@ public class NhaCungCap extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable2;
     private javax.swing.JLabel lblSearch;
     private com.raven.suportSwing.MyButton myButton1NCC;
     private com.raven.suportSwing.MyButton myButton2NCC;

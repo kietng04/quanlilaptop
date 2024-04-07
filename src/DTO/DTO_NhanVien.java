@@ -15,19 +15,19 @@ public class DTO_NhanVien {
     private int manv;
     private String hoten;
     private int gioitinh;
-    private String sdt;
     private Date ngaysinh;
-    private int trangthai;
+    private String sdt;
     private String email;
+    private int trangthai;
 
-    public DTO_NhanVien(int manv, String hoten, int gioitinh, String sdt, Date ngaysinh, int trangthai, String email) {
+    public DTO_NhanVien(int manv, String hoten, int gioitinh, Date ngaysinh, String sdt, String email, int trangthai) {
         this.manv = manv;
         this.hoten = hoten;
         this.gioitinh = gioitinh;
-        this.sdt = sdt;
         this.ngaysinh = ngaysinh;
-        this.trangthai = trangthai;
+        this.sdt = sdt;
         this.email = email;
+        this.trangthai = trangthai;
     }
 
     public int getManv() {

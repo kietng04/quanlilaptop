@@ -8,6 +8,10 @@ import BUS.BUS_NhanVien;
 import DTO.DTO_NhanVien;
 import GUI.CRUD.ThemNhanVienDialog;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,17 +19,33 @@ import javax.swing.table.DefaultTableModel;
  * @author KIET
  */
 public class NhanVien extends javax.swing.JPanel {
-//    public BUS_NhanVien busnv = new BUS_NhanVien();
-//    public ArrayList<DTO_NhanVien> listnv = busnv.getAllData();
-//    private DTO_NhanVien nvDTO;
-//    DefaultTableModel model;
+   public BUS_NhanVien busnv = new BUS_NhanVien();
+   public ArrayList<DTO_NhanVien> listnv = busnv.getAllData();
+   private DTO_NhanVien nvDTO;
+   DefaultTableModel modelNV;
 
     /**
      * Creates new form NhanVien
      */
     public NhanVien() {
         initComponents();
+        loadTable(listnv);
     }
+
+    public void loadTable(ArrayList<DTO_NhanVien> list) {
+        modelNV = (DefaultTableModel) jTable1.getModel();
+        modelNV.setRowCount(0);
+        for (DTO_NhanVien nv : list) {
+            String gioitinh = nv.getGioitinh() == 1 ? "Nam" : "Nữ";
+            modelNV.addRow(new Object[]{nv.getManv(), nv.getHoten(), gioitinh, nv.getNgaysinh(), nv.getSdt(), nv.getEmail()});
+        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+      for(int i = 0; i < 6; i++){
+          jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+      }
+    }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,8 +57,6 @@ public class NhanVien extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel7 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel33 = new javax.swing.JPanel();
         jPanel34 = new javax.swing.JPanel();
         txtSearchNCC11 = new com.raven.suportSwing.TextField();
@@ -68,30 +86,13 @@ public class NhanVien extends javax.swing.JPanel {
         jPanel35 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jLabel1NCC = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setLayout(new java.awt.BorderLayout());
 
         jPanel7.setBackground(new java.awt.Color(255, 204, 255));
         jPanel7.setLayout(new java.awt.BorderLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Mã ncc", "Tên ncc", "Dia chi", "Email", "So Dien Thoai"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel7.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel33.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -156,7 +157,7 @@ public class NhanVien extends javax.swing.JPanel {
                 .addComponent(myButton1NCC11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(myButton2NCC11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,11 +418,11 @@ public class NhanVien extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -431,7 +432,7 @@ public class NhanVien extends javax.swing.JPanel {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,23 +467,24 @@ public class NhanVien extends javax.swing.JPanel {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel7.add(jPanel33, java.awt.BorderLayout.NORTH);
+        jPanel7.add(jPanel33, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Ma nv", "Ho ten", "Gioi Tinh", "Ngay Sinh", "So dien Thoai", "Email"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel7.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        add(jPanel7, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchNCC11FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNCC11FocusGained
@@ -526,6 +528,18 @@ public class NhanVien extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: Xoa
+        int index = jTable1.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhan vien cần xóa");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int id = (int) jTable1.getValueAt(index, 0);
+                busnv.delete(id);
+                JOptionPane.showMessageDialog(null, "Xóa nhà cung cấp thành công");
+                loadTable(busnv.getAllData());
+            }
+        }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -555,6 +569,9 @@ public class NhanVien extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+    
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel7NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7NCCMousePressed
@@ -611,8 +628,8 @@ public class NhanVien extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private com.raven.suportSwing.MyButton myButton1NCC11;
     private com.raven.suportSwing.MyButton myButton2NCC11;
     private com.raven.suportSwing.TextField txtSearchNCC11;

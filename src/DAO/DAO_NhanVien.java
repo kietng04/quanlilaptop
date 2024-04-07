@@ -18,28 +18,34 @@ import javax.swing.JOptionPane;
  *
  * @author KIET
  */
-public class DAO_NhanVien implements DAOInterface<DTO_NhanVien>{
+public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
+    
+    public static DAO_NhanVien getInstance(){
+        return new DAO_NhanVien();
+    }
+   
 
     @Override
     public int insert(DTO_NhanVien t) {
-     try{
+        try{
             Connection con = (Connection) JDBCUtil.getConnectDB();
-            String sql = "INSERT INTO `nhanvien`(`manv`, `hoten`, `gioitinh`, `sdt`, `ngaysinh`, `trangthai`, `email`) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO `nhanvien`(`manv`, `hoten`, `gioitinh`, `ngaysinh`, `sdt`, `email`, `trangthai`) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setInt(1, t.getManv());
             pst.setString(2, t.getHoten());
             pst.setInt(3, t.getGioitinh());
-            pst.setString(4, t.getSdt());
-            pst.setDate(5, (java.sql.Date) t.getNgaysinh());
+            pst.setDate(4, new java.sql.Date(t.getNgaysinh().getTime())); // Set ngaysinh
+            pst.setString(5, t.getSdt()); // Set sdt
             pst.setString(6, t.getEmail());
             pst.setInt(7, t.getTrangthai());
             int result = pst.executeUpdate();
             JDBCUtil.close(con);
+            JOptionPane.showMessageDialog(null, "Them nhan vien thanh cong" + result);
             return result;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Loi them nhan vien: " + e.getMessage());
             return -1;
-     }
+        }
     }
 
     @Override
@@ -58,6 +64,7 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien>{
             int result = pst.executeUpdate();
             JDBCUtil.close(con);
             return result;
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Loi update nhan vien: " + e.getMessage());
             return -1;
@@ -79,27 +86,36 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien>{
             JOptionPane.showMessageDialog(null, "Loi xoa nhan vien: " + e.getMessage());
             return -1;
         }
+
     
     }
 
     @Override
     public ArrayList<DTO_NhanVien> getAllData() {
         ArrayList<DTO_NhanVien> result = new ArrayList<DTO_NhanVien>();
-        try {
-            Connection con = (Connection) JDBCUtil.getConnectDB();
+       try(Connection con = (Connection) JDBCUtil.getConnectDB()){
             String sql = "SELECT * FROM `nhanvien`";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                DTO_NhanVien nv = new DTO_NhanVien(rs.getInt("manv"), rs.getString("hoten"), rs.getInt("gioitinh"), rs.getString("sdt"), rs.getDate("ngaysinh"), rs.getInt("trangthai"), rs.getString("email"));
+            while(rs.next()){
+                int manv = rs.getInt("manv");
+                String hoten = rs.getString("hoten");
+                int gioitinh = rs.getInt("gioitinh");
+                String sdt = rs.getString("sdt");
+                java.sql.Date ngaysinh = rs.getDate("ngaysinh");
+                String email = rs.getString("email");
+                int trangthai = rs.getInt("trangthai");
+                DTO_NhanVien nv = new DTO_NhanVien(manv, hoten, gioitinh, ngaysinh, sdt, email, trangthai);
                 result.add(nv);
+
             }
             JDBCUtil.close(con);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi lay nhan vien: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Loi lay tat ca nhan vien: " + e.getMessage());
+            return null;
         }
+        JOptionPane.showMessageDialog(null, "Lay tat ca nhan vien thanh cong"+ result);
         return result;
-        
     }
 
     @Override
@@ -109,18 +125,17 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien>{
 
     @Override
     public int getAutoIncrement() {
-        
         try {
             Connection con = (Connection) JDBCUtil.getConnectDB();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlybanhang' AND TABLE_NAME = 'nhanvien'";
+            String sql = "SELECT Max(manv) as AUTO_INCREMENT FROM `nhanvien`";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("AUTO_INCREMENT");
+            if(rs.next()){
+                return rs.getInt("AUTO_INCREMENT") + 1;
             }
             JDBCUtil.close(con);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi lay AUTO_INCREMENT nhan vien: " + e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Loi lay AUTO_INCREMENT: " + e.getMessage());
         }
         return -1;
     }
