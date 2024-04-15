@@ -33,6 +33,9 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jPanel19 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -65,7 +68,6 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1070, 720));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -84,7 +86,7 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
         });
         jPanel10.add(jTextField1);
 
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 305));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 245));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,6 +102,21 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable2);
 
         jPanel10.add(jScrollPane2);
+
+        jButton6.setText("Thêm sản phẩm");
+        jButton6.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton6);
+
+        jButton7.setText("Xuất pdf");
+        jButton7.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel19.add(jButton7);
+
+        jPanel10.add(jPanel19);
 
         jPanel2.add(jPanel10);
 
@@ -308,6 +325,10 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +378,8 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -374,6 +397,7 @@ public class ThemPhieuXuat extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
