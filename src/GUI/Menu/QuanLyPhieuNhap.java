@@ -4,7 +4,6 @@
  */
 package GUI.Menu;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 
 import BUS.BUS_NhaCungCap;
@@ -12,8 +11,6 @@ import BUS.BUS_NhanVien;
 import DTO.DTO_NhaCungCap;
 import DTO.DTO_NhanVien;
 
-=======
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
 /**
  *
  * @author Admin
@@ -23,7 +20,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     /**
      * Creates new form QuanLyPhieuNhap
      */
-<<<<<<< HEAD
     BUS_NhaCungCap busncc = new BUS_NhaCungCap();
     BUS_NhanVien busnv = new BUS_NhanVien();
     ArrayList<DTO_NhaCungCap> listNCC = busncc.getAllData();
@@ -47,10 +43,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         for (DTO_NhanVien nv : listNV) {
             jComboBox2.addItem(nv.getHoten());
         }
-=======
-    public QuanLyPhieuNhap() {
-        initComponents();
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
     }
 
     /**
@@ -62,36 +54,10 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
         jPanel2 = new javax.swing.JPanel();
         lblSearch = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-=======
-        jPanel13 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jPanel18 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel21 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
         jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         txtSearchNCC = new com.raven.suportSwing.TextField();
@@ -121,7 +87,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jLabel1NCC = new javax.swing.JLabel();
-<<<<<<< HEAD
         jPanel22 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
@@ -165,125 +130,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         );
 
         jPanel13.setBackground(new java.awt.Color(255, 204, 255));
-=======
-
-        setPreferredSize(new java.awt.Dimension(3200, 800));
-
-        jPanel13.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel13.setLayout(new java.awt.BorderLayout());
-
-        jPanel22.setPreferredSize(new java.awt.Dimension(1220, 460));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
-        flowLayout1.setAlignOnBaseline(true);
-        jPanel22.setLayout(flowLayout1);
-
-        jPanel15.setPreferredSize(new java.awt.Dimension(210, 450));
-
-        jPanel16.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel16.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Nhà cung cấp");
-        jPanel16.add(jLabel1, java.awt.BorderLayout.PAGE_START);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(72, 30));
-        jPanel16.add(jComboBox1, java.awt.BorderLayout.PAGE_END);
-
-        jPanel15.add(jPanel16);
-
-        jPanel17.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel17.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nhân viên nhập");
-        jPanel17.add(jLabel2, java.awt.BorderLayout.CENTER);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(72, 30));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel17.add(jComboBox2, java.awt.BorderLayout.PAGE_END);
-
-        jPanel15.add(jPanel17);
-
-        jPanel18.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel18.setLayout(new java.awt.BorderLayout());
-
-        jTextField1.setText("jTextField1");
-        jTextField1.setPreferredSize(new java.awt.Dimension(71, 30));
-        jPanel18.add(jTextField1, java.awt.BorderLayout.CENTER);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Từ ngày");
-        jPanel18.add(jLabel3, java.awt.BorderLayout.PAGE_START);
-
-        jPanel15.add(jPanel18);
-
-        jPanel19.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel19.setLayout(new java.awt.BorderLayout());
-
-        jTextField2.setText("jTextField2");
-        jTextField2.setPreferredSize(new java.awt.Dimension(71, 30));
-        jPanel19.add(jTextField2, java.awt.BorderLayout.CENTER);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Đến ngày");
-        jPanel19.add(jLabel4, java.awt.BorderLayout.PAGE_START);
-
-        jPanel15.add(jPanel19);
-
-        jPanel20.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel20.setLayout(new java.awt.BorderLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Từ số tiền (VNĐ)");
-        jPanel20.add(jLabel5, java.awt.BorderLayout.CENTER);
-
-        jTextField3.setText("jTextField3");
-        jTextField3.setPreferredSize(new java.awt.Dimension(71, 30));
-        jPanel20.add(jTextField3, java.awt.BorderLayout.PAGE_END);
-
-        jPanel15.add(jPanel20);
-
-        jPanel21.setPreferredSize(new java.awt.Dimension(200, 50));
-        jPanel21.setLayout(new java.awt.BorderLayout());
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Đến số tiền (VNĐ)");
-        jPanel21.add(jLabel6, java.awt.BorderLayout.CENTER);
-
-        jTextField4.setText("jTextField4");
-        jTextField4.setPreferredSize(new java.awt.Dimension(71, 30));
-        jPanel21.add(jTextField4, java.awt.BorderLayout.PAGE_END);
-
-        jPanel15.add(jPanel21);
-
-        jPanel22.add(jPanel15);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 450));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Mã ncc", "Tên ncc", "Dia chi", "Gioi Tinh", "So Dien Thoai"
-            }
-        ));
-        jTable2.setPreferredSize(new java.awt.Dimension(1000, 80));
-        jScrollPane1.setViewportView(jTable2);
-
-        jPanel22.add(jScrollPane1);
-
-        jPanel13.add(jPanel22, java.awt.BorderLayout.SOUTH);
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
 
         jPanel12.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -348,11 +194,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
                 .addComponent(myButton1NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(myButton2NCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                 .addContainerGap(12, Short.MAX_VALUE))
-=======
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,19 +455,11 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-<<<<<<< HEAD
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -657,11 +491,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-=======
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -674,7 +504,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-<<<<<<< HEAD
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
         flowLayout1.setAlignOnBaseline(true);
         jPanel22.setLayout(flowLayout1);
@@ -836,15 +665,11 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-=======
-        jPanel13.add(jPanel12, java.awt.BorderLayout.NORTH);
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGap(0, 4814, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -930,71 +755,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
 //            }
 //        }
     }//GEN-LAST:event_jButton3ActionPerformed
-=======
-            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jLabel1NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1NCCMousePressed
-        // TODO add your handling code here:
-        //        AddProducts add = new AddProducts(parent, true, this);
-        //        add.setLocationRelativeTo(null);
-        //        add.setVisible(true);
-    }//GEN-LAST:event_jLabel1NCCMousePressed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Button 4 được nhấn!");
-        ThemNhaCungCap dialog = new ThemNhaCungCap(new javax.swing.JFrame(), true, this);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jLabel7NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7NCCMousePressed
-        //        ViewCauHinh vch = new ViewCauHinh(parent, true, currentIDselected);
-        //        vch.setLocationRelativeTo(null);
-        //        vch.setVisible(true);
-        //        vch.setResizable(false);
-    }//GEN-LAST:event_jLabel7NCCMousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        int index = getRowSelected();
-        if (index == -1) {
-            return;
-        }
-        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable2.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable2.getValueAt(index, 1).toString();
-        String diaChi = jTable2.getValueAt(index, 2).toString();
-        String email = jTable2.getValueAt(index, 3).toString();
-        String sdt = jTable2.getValueAt(index, 4).toString();
-        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
-        XemNhaCungCapDialog xemncc = new XemNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO);
-        xemncc.setLocationRelativeTo(null);
-        xemncc.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
 
     private void jLabel3NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3NCCMousePressed
         // this func to delete product
@@ -1007,7 +767,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         //        FillTable(productBUS.getAllData());
     }//GEN-LAST:event_jLabel3NCCMousePressed
 
-<<<<<<< HEAD
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
 //        int index = getRowSelected();
@@ -1059,75 +818,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         //        add.setLocationRelativeTo(null);
         //        add.setVisible(true);
     }//GEN-LAST:event_jLabel1NCCMousePressed
-=======
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here: Xoa
-        int index = jTable2.getSelectedRow();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần xóa");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                int id = (int) jTable2.getValueAt(index, 0);
-                busncc.delete(id);
-                JOptionPane.showMessageDialog(null, "Xóa nhà cung cấp thành công");
-                loadTable(busncc.getAllData());
-            }
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jLabel2NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2NCCMousePressed
-        // Thêm sự kiện lắng nghe sự kiện chọn hàng của JTable
-        //        if (currentIDselected == -1) {
-            //            JOptionPane.showMessageDialog(parent, "Vui lòng chọn sản phẩm để chỉnh sửa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-            //            return;
-            //        }
-        //        EditProduct add = new EditProduct(parent, true, currentIDselected);
-        //        add.setLocationRelativeTo(null);
-        //        add.setVisible(true);
-    }//GEN-LAST:event_jLabel2NCCMousePressed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int index = getRowSelected();
-        if (index == -1) {
-            return;
-        }
-        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable2.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable2.getValueAt(index, 1).toString();
-        String diaChi = jTable2.getValueAt(index, 2).toString();
-        String email = jTable2.getValueAt(index, 3).toString();
-        String sdt = jTable2.getValueAt(index, 4).toString();
-        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
-        SuaNhaCungCapDialog suaNCC = new SuaNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO, this);
-        suaNCC.setLocationRelativeTo(null);
-        suaNCC.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void myButton2NCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2NCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton2NCCActionPerformed
-
-    private void myButton1NCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1NCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myButton1NCCActionPerformed
-
-    private void jComboBoxNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxNCCActionPerformed
-
-    private void txtSearchNCCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNCCKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNCCKeyReleased
-
-    private void txtSearchNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNCCActionPerformed
-
-    private void txtSearchNCCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNCCFocusGained
-
-    }//GEN-LAST:event_txtSearchNCCFocusGained
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1165,41 +855,25 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
-<<<<<<< HEAD
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel24;
-=======
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-<<<<<<< HEAD
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable2;
-=======
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable2;
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-<<<<<<< HEAD
     private javax.swing.JLabel lblSearch;
-=======
->>>>>>> 65fa0facc5a598d820e2cfc73113a6e934d7e65c
     private com.raven.suportSwing.MyButton myButton1NCC;
     private com.raven.suportSwing.MyButton myButton2NCC;
     private com.raven.suportSwing.TextField txtSearchNCC;
