@@ -11,6 +11,7 @@ import GUI.Menu.FormItems;
 import GUI.Menu.KhachHang;
 import GUI.Menu.NhaCungCap;
 import GUI.Menu.NhanVien;
+import GUI.Menu.QuanLyPhieuNhap;
 import GUI.Menu.QuanLyThuocTinh;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -130,6 +131,14 @@ public class MenuTaskBar extends JPanel {
                 FormItems product = new FormItems();
                 main.changePages(product);
 
+            }
+        });
+
+        listitem[3].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                QuanLyPhieuNhap qlpn = new QuanLyPhieuNhap();
+                main.changePages(qlpn);
             }
         });
 

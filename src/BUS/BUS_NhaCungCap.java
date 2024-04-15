@@ -16,9 +16,10 @@ import DAO.DAO_NhaCungCap;
  */
 public class BUS_NhaCungCap {
     public DAO_NhaCungCap ncc = new DAO_NhaCungCap();
+    ArrayList<DTO_NhaCungCap> listNCC = new ArrayList<DTO_NhaCungCap>();
 
     public BUS_NhaCungCap() {
-
+        listNCC = ncc.getAllData();
     }
 
     public ArrayList<DTO_NhaCungCap> getAllData() {

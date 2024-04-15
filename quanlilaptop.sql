@@ -164,5 +164,23 @@ VALUES
 
 -- --------------------------------------------------------
 
+CREATE TABLE `KhachHang` (
+  `MaKH` int(11) NOT NULL,
+  `TenKH` varchar(255) DEFAULT NULL,
+  `DiaChi` varchar(255) DEFAULT NULL,
+  `SDT` varchar(255) DEFAULT NULL,
+  `NgayThamGia` date DEFAULT NULL,
+  `GioiTinh` varchar(255) DEFAULT NULL,
+  `TrangThai` tinyint(4) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `KhachHang` (`MaKH`, `TenKH`, `DiaChi`, `SDT`, `NgayThamGia`, `GioiTinh`, `TrangThai`) VALUES
+(1, 'Nguyễn Văn A', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1),
+(2, 'Nguyễn Văn B', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1),
+(3, 'Nguyễn Văn C', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1),
+(4, 'Nguyễn Văn D', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1),
+(5, 'Nguyễn Văn E', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12','Nam', 1),
+(6, 'Nguyễn Văn F', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1);
+
 
 COMMIT;
