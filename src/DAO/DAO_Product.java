@@ -119,7 +119,6 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
             JDBCUtil.close(con);
         } catch (Exception e) {
         }
-        JOptionPane.showMessageDialog(null, "Nội dung của listProduct: " + result);
         return result;
     }
 

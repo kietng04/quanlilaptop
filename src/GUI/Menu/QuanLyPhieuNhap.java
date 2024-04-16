@@ -596,10 +596,10 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        System.out.println("Button 4 được nhấn!");
-        ThemNhaCungCap dialog = new ThemNhaCungCap(new javax.swing.JFrame(), true, this);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        // System.out.println("Button 4 được nhấn!");
+        // ThemNhaCungCap dialog = new ThemNhaCungCap(new javax.swing.JFrame(), true, this);
+        // dialog.setLocationRelativeTo(null);
+        // dialog.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jLabel7NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7NCCMousePressed
@@ -623,20 +623,20 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        int index = getRowSelected();
-        if (index == -1) {
-            return;
-        }
-        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable2.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable2.getValueAt(index, 1).toString();
-        String diaChi = jTable2.getValueAt(index, 2).toString();
-        String email = jTable2.getValueAt(index, 3).toString();
-        String sdt = jTable2.getValueAt(index, 4).toString();
-        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
-        XemNhaCungCapDialog xemncc = new XemNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO);
-        xemncc.setLocationRelativeTo(null);
-        xemncc.setVisible(true);
+        // int index = getRowSelected();
+        // if (index == -1) {
+        //     return;
+        // }
+        // // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
+        // int maNCC = jTable2.getValueAt(index, 0).hashCode();
+        // String tenNCC = jTable2.getValueAt(index, 1).toString();
+        // String diaChi = jTable2.getValueAt(index, 2).toString();
+        // String email = jTable2.getValueAt(index, 3).toString();
+        // String sdt = jTable2.getValueAt(index, 4).toString();
+        // DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
+        // XemNhaCungCapDialog xemncc = new XemNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO);
+        // xemncc.setLocationRelativeTo(null);
+        // xemncc.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel3NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3NCCMousePressed
@@ -652,18 +652,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: Xoa
-        int index = jTable2.getSelectedRow();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần xóa");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhà cung cấp này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                int id = (int) jTable2.getValueAt(index, 0);
-                busncc.delete(id);
-                JOptionPane.showMessageDialog(null, "Xóa nhà cung cấp thành công");
-                loadTable(busncc.getAllData());
-            }
-        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel2NCCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2NCCMousePressed
@@ -678,20 +667,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2NCCMousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int index = getRowSelected();
-        if (index == -1) {
-            return;
-        }
-        // JOptionPane.showMessageDialog(this, "Ban da chon nha cung cap nay: " + index);
-        int maNCC = jTable2.getValueAt(index, 0).hashCode();
-        String tenNCC = jTable2.getValueAt(index, 1).toString();
-        String diaChi = jTable2.getValueAt(index, 2).toString();
-        String email = jTable2.getValueAt(index, 3).toString();
-        String sdt = jTable2.getValueAt(index, 4).toString();
-        DTO_NhaCungCap nccDTO = new DTO_NhaCungCap(maNCC, tenNCC, diaChi, email, sdt, 1);
-        SuaNhaCungCapDialog suaNCC = new SuaNhaCungCapDialog(new javax.swing.JFrame(), true, nccDTO, this);
-        suaNCC.setLocationRelativeTo(null);
-        suaNCC.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void myButton2NCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2NCCActionPerformed

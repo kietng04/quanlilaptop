@@ -14,8 +14,10 @@ import java.util.ArrayList;
  */
 public class BUS_NhanVien {
     public DAO_NhanVien nv = new DAO_NhanVien();
+    public ArrayList<DTO_NhanVien> listNhanVien = new ArrayList<>();
 
     public BUS_NhanVien() {
+        listNhanVien = nv.getAllData();
     }
      public ArrayList<DTO_NhanVien> getAllData() {
         return nv.getAllData();
@@ -33,4 +35,13 @@ public class BUS_NhanVien {
         nv.delete(id);
     }
     
+    public ArrayList<DTO_NhanVien> search(String name) {
+        ArrayList<DTO_NhanVien> result = new ArrayList<>();
+        for (DTO_NhanVien x : listNhanVien) {
+            if (x.getHoten().toLowerCase().contains(name.toLowerCase())) {
+                result.add(x);
+            }
+        }
+        return result;
+    }
 }

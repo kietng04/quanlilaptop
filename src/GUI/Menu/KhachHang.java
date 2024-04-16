@@ -1,160 +1,468 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package GUI.Menu;
 
-import DTO.KhachHangDTO;
-import GUI.Component.PanelBorderRadius;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.BoxLayout;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.List;
+
+import BUS.BUS_KhachHang;
+import DTO.DTO_KhachHang;
+import GUI.CRUD.SuaKhachHang;
+import GUI.CRUD.ThemKhachHang;
+import GUI.CRUD.XemKhachHang;
 /**
  *
- * @author KIET
+ * @author Admin
  */
-public class KhachHang extends JPanel implements ActionListener, ItemListener{
-    PanelBorderRadius main, functionBar;
-    JPanel pnlBorder1, pnlBorder2, pnlBorder3, pnlBorder4, contentCenter;
-    JTable tableKhachHang;
-    JScrollPane scrollTableKhachHang;
-//    MainFunction mainFunction;
-    JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
-//    IntegratedSearch search;
-    DefaultTableModel tblModel;
-//    public KhachHangBUS khachhangBUS = new KhachHangBUS();
-//    public ArrayList<KhachHangDTO> listkh = khachhangBUS.getAll();
-//    Main m;
-    Color BackgroundColor = new Color(240, 247, 250);
-    
-     private void initComponent() {
-        this.setBackground(BackgroundColor);
-        this.setLayout(new BorderLayout(0, 0));
-        this.setOpaque(true);
+public class KhachHang extends javax.swing.JPanel {
+    JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+    BUS_KhachHang busKh = new BUS_KhachHang();
+    String currentIDSelected = "-1";
+    public ArrayList<DTO_KhachHang> listKh = busKh.getAllData();
+    /**
+     * Creates new form KhachHang
+     */
+    public KhachHang() {
+        initComponents();
+        filltable(listKh);
 
-        tableKhachHang = new JTable();
-        scrollTableKhachHang = new JScrollPane();
-        tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Mã khách hàng ascadfcasdfs", "Tên khách hàng asdfasdfdasf", "Địa chỉ", "Số điện thoại", "Ngày tham gia"};
-        //  JOptionPane.showMessageDialog(this, "The number entheaderered is: " + header, "Message", JOptionPane.INFORMATION_MESSAGE);
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = jTable1.getSelectedRow();
+                    if (selectedRow != -1) { 
+                        currentIDSelected = jTable1.getValueAt(selectedRow, 0).toString();
+                    }
+                }
+            }
+        });
+    }
 
-        tblModel.setColumnIdentifiers(header);
-        tableKhachHang.setModel(tblModel);
-        tableKhachHang.setFocusable(false);
-        scrollTableKhachHang.setViewportView(tableKhachHang);
+    public void filltable(ArrayList<DTO_KhachHang> list) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (DTO_KhachHang kh : list) {
+            model.addRow(new Object[]{kh.getMaKhachHang(), kh.getHoTen(), kh.getDiaChi(), kh.getSoDienThoai(), kh.getNgayThamGia()});
+        }
+
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tableKhachHang.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
-        tableKhachHang.setAutoCreateRowSorter(true);
-//        TableSorter.configureTableColumnSorter(tableKhachHang, 0, TableSorter.INTEGER_COMPARATOR);
-
-        // pnlBorder1, pnlBorder2, pnlBorder3, pnlBorder4 chỉ để thêm contentCenter ở giữa mà contentCenter không bị dính sát vào các thành phần khác
-        pnlBorder1 = new JPanel();
-        pnlBorder1.setPreferredSize(new Dimension(0, 10));
-        pnlBorder1.setBackground(BackgroundColor);
-        this.add(pnlBorder1, BorderLayout.NORTH);
-
-        pnlBorder2 = new JPanel();
-        pnlBorder2.setPreferredSize(new Dimension(0, 10));
-        pnlBorder2.setBackground(BackgroundColor);
-        this.add(pnlBorder2, BorderLayout.SOUTH);
-
-        pnlBorder3 = new JPanel();
-        pnlBorder3.setPreferredSize(new Dimension(10, 0));
-        pnlBorder3.setBackground(BackgroundColor);
-        this.add(pnlBorder3, BorderLayout.EAST);
-
-        pnlBorder4 = new JPanel();
-        pnlBorder4.setPreferredSize(new Dimension(10, 0));
-        pnlBorder4.setBackground(BackgroundColor);
-        this.add(pnlBorder4, BorderLayout.WEST);
-
-        contentCenter = new JPanel();
-        contentCenter.setPreferredSize(new Dimension(1100, 600));
-        contentCenter.setBackground(BackgroundColor);
-        contentCenter.setLayout(new BorderLayout(10, 10));
-        this.add(contentCenter, BorderLayout.CENTER);
-
-        // functionBar là thanh bên trên chứa các nút chức năng như thêm xóa sửa, và tìm kiếm
-        functionBar = new PanelBorderRadius();
-        functionBar.setPreferredSize(new Dimension(0, 100));
-        functionBar.setLayout(new GridLayout(1, 2, 50, 0));
-        functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-        String[] action = {"create", "update", "delete", "detail", "import", "export"};
-//        mainFunction = new MainFunction(m.user.getManhomquyen(), "khachhang", action);
-//        for (String ac : action) {
-//            mainFunction.btn.get(ac).addActionListener(this);
-//        }
-//        functionBar.add(mainFunction);
-//
-//        search = new IntegratedSearch(new String[]{"Tất cả", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại"});
-//        search.cbxChoose.addItemListener(this);
-//        search.txtSearchForm.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//                String type = (String) search.cbxChoose.getSelectedItem();
-//                String txt = search.txtSearchForm.getText();
-//                listkh = khachhangBUS.search(txt, type);
-//                loadDataTable(listkh);
-//            }
-//        });
-//
-//        search.btnReset.addActionListener((ActionEvent e) -> {
-//            search.txtSearchForm.setText("");
-//            listkh = khachhangBUS.getAll();
-//            loadDataTable(listkh);
-//        });
-//        
-//        
-//        functionBar.add(search);
-
-        contentCenter.add(functionBar, BorderLayout.NORTH);
-
-        // main là phần ở dưới để thống kê bảng biểu
-        main = new PanelBorderRadius();
-        BoxLayout boxly = new BoxLayout(main, BoxLayout.Y_AXIS);
-        main.setLayout(boxly);
-//        main.setBorder(new EmptyBorder(20, 20, 20, 20));
-        contentCenter.add(main, BorderLayout.CENTER);
-
-        main.add(scrollTableKhachHang);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }  
     }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jToggleButton5 = new javax.swing.JToggleButton();
+        jToggleButton6 = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField2.setText("Tìm kiếm tên khách hàng");
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jToggleButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-edit-75.png"))); // NOI18N
+        jToggleButton2.setText("Sửa");
+        jToggleButton2.setToolTipText("");
+        jToggleButton2.setBorder(null);
+        jToggleButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton2.setDoubleBuffered(true);
+        jToggleButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseExited(evt);
+            }
+        });
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-delete-85.png"))); // NOI18N
+        jToggleButton3.setText("Xóa");
+        jToggleButton3.setToolTipText("");
+        jToggleButton3.setBorder(null);
+        jToggleButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton3MouseExited(evt);
+            }
+        });
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-75.png"))); // NOI18N
+        jToggleButton4.setText("Thêm");
+        jToggleButton4.setToolTipText("");
+        jToggleButton4.setBorder(null);
+        jToggleButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jToggleButton4FocusGained(evt);
+            }
+        });
+        jToggleButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton4MouseExited(evt);
+            }
+        });
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-export-excel-75.png"))); // NOI18N
+        jToggleButton5.setText("Xuất excel");
+        jToggleButton5.setToolTipText("");
+        jToggleButton5.setBorder(null);
+        jToggleButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton5MouseExited(evt);
+            }
+        });
+        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton5ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-view-75.png"))); // NOI18N
+        jToggleButton6.setText("Chi tiết");
+        jToggleButton6.setToolTipText("");
+        jToggleButton6.setBorder(null);
+        jToggleButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jToggleButton6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jToggleButton6MouseExited(evt);
+            }
+        });
+        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(211, Short.MAX_VALUE)
+                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToggleButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jToggleButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jToggleButton2.getAccessibleContext().setAccessibleName("75");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(87, 87, 87)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại", "Ngày tham gia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
+        );
+    }// </editor-fold>                        
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // sua khach hang
+        if (currentIDSelected != "-1") {
+            SuaKhachHang suakh = new SuaKhachHang(parent, true, this, currentIDSelected);
+            suakh.setLocationRelativeTo(null);
+            suakh.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng cần sửa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+        }
+    }                                              
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here: xoa
+        if (currentIDSelected != "-1") {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa khách hàng này?", "Cảnh báo", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                if (busKh.delete(currentIDSelected) == 1) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
+                    filltable(busKh.getAllData());
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng cần xóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+        }
+    }                                              
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // them khach hang
+        ThemKhachHang themkh = new ThemKhachHang(parent, true, this);
+        themkh.setLocationRelativeTo(null);
+        themkh.setVisible(true);
+    }                                              
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // xem chi tiet
+        if (currentIDSelected != "-1") {
+            XemKhachHang suakh = new XemKhachHang(parent, true, this, currentIDSelected);
+            suakh.setLocationRelativeTo(null);
+            suakh.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn khách hàng cần xem", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+        }
+    }                                              
+
+    private void jToggleButton4FocusGained(java.awt.event.FocusEvent evt) {                                           
+
+    }                                          
+
+    private void jToggleButton4MouseEntered(java.awt.event.MouseEvent evt) {                                            
+        jToggleButton4.setBackground(getBackground().darker());
+        jToggleButton4.setOpaque(true);
+    }                                           
+
+    private void jToggleButton4MouseExited(java.awt.event.MouseEvent evt) {                                           
+        jToggleButton4.setBackground(Color.WHITE);
+        jToggleButton4.setOpaque(true);
+    }                                          
+
+    private void jToggleButton2MouseEntered(java.awt.event.MouseEvent evt) {                                            
+        jToggleButton2.setBackground(getBackground().darker());
+        jToggleButton2.setOpaque(true);
+    }                                           
+
+    private void jToggleButton2MouseExited(java.awt.event.MouseEvent evt) {                                           
+        jToggleButton2.setBackground(Color.WHITE);
+        jToggleButton2.setOpaque(true);
+    }                                          
+
+    private void jToggleButton3MouseEntered(java.awt.event.MouseEvent evt) {                                            
+        jToggleButton3.setBackground(getBackground().darker());
+        jToggleButton3.setOpaque(true);
+    }                                           
+
+    private void jToggleButton3MouseExited(java.awt.event.MouseEvent evt) {                                           
+        jToggleButton3.setBackground(Color.WHITE);
+        jToggleButton3.setOpaque(true);
+    }                                          
+
+    private void jToggleButton6MouseEntered(java.awt.event.MouseEvent evt) {                                            
+        jToggleButton6.setBackground(getBackground().darker());
+        jToggleButton6.setOpaque(true);
+    }                                           
+
+    private void jToggleButton6MouseExited(java.awt.event.MouseEvent evt) {                                           
+        jToggleButton6.setBackground(Color.WHITE);
+        jToggleButton6.setOpaque(true);
+    }                                          
+
+    private void jToggleButton5MouseEntered(java.awt.event.MouseEvent evt) {                                            
+        jToggleButton5.setBackground(getBackground().darker());
+        jToggleButton5.setOpaque(true);
+    }                                           
+
+    private void jToggleButton5MouseExited(java.awt.event.MouseEvent evt) {                                           
+        jToggleButton5.setBackground(Color.WHITE);
+        jToggleButton5.setOpaque(true);
+    }                                          
+
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {                                        
+        if(jTextField2.getText().equals("Tìm kiếm tên khách hàng")){
+            jTextField2.setText("");
+            jTextField2.setForeground(Color.BLACK);
+        }
+    }                                       
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {                                      
+        if( jTextField2.getText().isEmpty()){
+            jTextField2.setForeground(Color.GRAY);
+            jTextField2.setText("Tìm kiếm tên khách hàng");
+                }
+    }      
     
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void jTextField2ActionPerformed(ActionEvent evt) {
+        // search theo ten
+        String ten = jTextField2.getText();
+        if (!ten.equals("")) {
+            listKh = busKh.search(ten);
+            filltable(listKh);
+        }
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+    // Variables declaration - do not modify                     
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JToggleButton jToggleButton6;
+    // End of variables declaration                   
 }
