@@ -8,6 +8,8 @@ import DTO.DTO_NhaCungCap;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import DAO.DAO_NhaCungCap;
 
 /**
@@ -38,6 +40,22 @@ public class BUS_NhaCungCap {
         ncc.delete(id);
     }
    
+    public String getTenNhaCungCap(int mancc) {
+        //JOptionPane.showMessageDialog(null, "getTenNhaCungCap: "+this.listNCC.get(mancc).getTenncc());
+        return this.listNCC.get(getIndexByMaNCC(mancc)).getTenncc();
+    }
+    public int getIndexByMaNCC(int mancc) {
+        int i = 0;
+        int vitri = -1;
+        while (i < this.listNCC.size() && vitri == -1) {
+            if (listNCC.get(i).getMancc() == mancc) {
+                vitri = i;
+            } else {
+                i++;
+            }
+        }
+        return vitri;
+    }
     
 
 }

@@ -166,7 +166,7 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
                 int trangthai = rs.getInt("trangthai");
                 String thuonghieu = rs.getString("thuonghieu");
                 int maloai = rs.getInt("maloai");    
-                return new DTO_Product(madm,tendm,boxuly,hedieuhanh, khuvuckho,hinhanh, thoigianbaohanh,trangthai, thuonghieu, maloai);
+                return new DTO_Product(madm, tendm ,boxuly,hedieuhanh, khuvuckho,hinhanh, thoigianbaohanh,trangthai, thuonghieu, maloai);
             }
             JDBCUtil.close(con);
         } catch (Exception e) {

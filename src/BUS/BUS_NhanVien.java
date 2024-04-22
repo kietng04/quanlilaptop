@@ -8,6 +8,8 @@ import DAO.DAO_NhanVien;
 import DTO.DTO_NhanVien;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author KIET
@@ -43,5 +45,10 @@ public class BUS_NhanVien {
             }
         }
         return result;
+    }
+
+    public String getNameById(int manv) {
+    //JOptionPane.showMessageDialog(null, "getNameById: "+this.listNhanVien.get(manv).getHoten());
+    return nv.selectById(manv+"").getHoten();
     }
 }

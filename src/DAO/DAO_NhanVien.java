@@ -119,8 +119,28 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
     }
 
     @Override
-    public DTO_NhanVien selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public  DTO_NhanVien selectById(String t) {
+        DTO_NhanVien result = null;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM nhanvien WHERE manv=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            if(rs.next()){
+                int manv = rs.getInt("manv");
+                String hoten = rs.getString("hoten");
+                int gioitinh = rs.getInt("gioitinh");
+                String sdt = rs.getString("sdt");
+                java.sql.Date ngaysinh = rs.getDate("ngaysinh");
+                String email = rs.getString("email");
+                int trangthai = rs.getInt("trangthai");
+                result = new DTO_NhanVien(manv, hoten, gioitinh, ngaysinh, sdt, email, trangthai);
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return result;
     }
 
     @Override

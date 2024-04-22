@@ -46,7 +46,7 @@ public class NhaCungCap extends javax.swing.JPanel {
 
     public void loadTable(ArrayList<DTO_NhaCungCap> list) {
     model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0); // Clear the table
+        model.setRowCount(0); 
     
         for (DTO_NhaCungCap ncc : list) {
             Object[] row = new Object[] {

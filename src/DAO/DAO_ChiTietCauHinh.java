@@ -16,11 +16,16 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kiet
  */
 public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHinh> {
+    public static DAO_ChiTietCauHinh getInstance() {
+        return new DAO_ChiTietCauHinh();
+    }
 
     @Override
     public int insert(ArrayList<DTO_ChiTietCauHinh> t) {
@@ -197,6 +202,26 @@ public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHin
             }
             JDBCUtil.close(con);
         } catch (Exception e) {
+        }
+        return result;
+    }
+
+    public int updateSoLuongTon(int maphienban, int soluong) {
+        DTO_ChiTietCauHinh pbsp = this.selectById(maphienban);
+        int result = 0;
+        int quantity_change = pbsp.getSoluongton() + soluong;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "UPDATE `phienbansanpham` SET `soluongton`=? WHERE maphienbansp = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, quantity_change);
+            pst.setInt(2, pbsp.getMaphienbansp());
+            result = pst.executeUpdate();
+            JDBCUtil.close(con);
+            JOptionPane.showMessageDialog(null, "Update thanh cong so luong ton thanh cong: " + result);
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Loi update so luong ton: " + ex.getMessage());
+
         }
         return result;
     }

@@ -19,6 +19,7 @@ public class DTO_Product {
     private int trangthai;
     private String thuonghieu;
     private int maLoai;
+    private int soluongtong;
     
     public DTO_Product(int masanpham, String tensanpham, String boxuly, String hedieuhanh, String vitrikho, String hinhsanpham, String thoigianbaohanh, int trangthai, String thuonghieu, int maLoai) {
         this.masanpham = masanpham;
@@ -32,6 +33,41 @@ public class DTO_Product {
         this.thuonghieu = thuonghieu;
         this.maLoai = maLoai;
     }
+
+    public DTO_Product(int masanpham, String tensanpham, String boxuly, String hedieuhanh, String vitrikho, String hinhsanpham, String thoigianbaohanh, int trangthai, String thuonghieu, int maLoai, int soluongtong) {
+        this.masanpham = masanpham;
+        this.tensanpham = tensanpham;
+        this.boxuly = boxuly;
+        this.hedieuhanh = hedieuhanh;
+        this.vitrikho = vitrikho;
+        this.hinhsanpham = hinhsanpham;
+        this.thoigianbaohanh = thoigianbaohanh;
+        this.trangthai = trangthai;
+        this.thuonghieu = thuonghieu;
+        this.maLoai = maLoai;
+        this.soluongtong = soluongtong;
+    }
+
+    public int getMaLoai() {
+        return maLoai;
+    }
+
+    public int getSoluongtong() {
+        return soluongtong;
+    }
+
+    public void setThuonghieu(String thuonghieu) {
+        this.thuonghieu = thuonghieu;
+    }
+
+    public void setMaLoai(int maLoai) {
+        this.maLoai = maLoai;
+    }
+
+    public void setSoluongtong(int soluongtong) {
+        this.soluongtong = soluongtong;
+    }
+    
     
     public int getmaLoai() {
         return maLoai;

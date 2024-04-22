@@ -141,6 +141,14 @@ public class MenuTaskBar extends JPanel {
                 main.changePages(qlpn);
             }
         });
+        
+         listitem[4].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                QuanLyPhieuNhap qlpn = new QuanLyPhieuNhap();
+                main.changePages(qlpn);
+            }
+        });
 
         listitem[2].addMouseListener(new MouseAdapter() {
             @Override
