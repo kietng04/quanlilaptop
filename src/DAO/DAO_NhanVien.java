@@ -40,10 +40,10 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
             pst.setInt(7, t.getTrangthai());
             int result = pst.executeUpdate();
             JDBCUtil.close(con);
-            JOptionPane.showMessageDialog(null, "Them nhan vien thanh cong" + result);
+            // JOptionPane.showMessageDialog(null, "Them nhan vien thanh cong" + result);
             return result;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Loi them nhan vien: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi them nhan vien: " + e.getMessage());
             return -1;
         }
     }
@@ -66,7 +66,7 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
             return result;
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi update nhan vien: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi update nhan vien: " + e.getMessage());
             return -1;
         }
 
@@ -83,7 +83,7 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
             JDBCUtil.close(con);
             return result;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi xoa nhan vien: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi xoa nhan vien: " + e.getMessage());
             return -1;
         }
 
@@ -111,16 +111,36 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
             }
             JDBCUtil.close(con);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi lay tat ca nhan vien: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi lay tat ca nhan vien: " + e.getMessage());
             return null;
         }
-        JOptionPane.showMessageDialog(null, "Lay tat ca nhan vien thanh cong"+ result);
+        // JOptionPane.showMessageDialog(null, "Lay tat ca nhan vien thanh cong"+ result);
         return result;
     }
 
     @Override
-    public DTO_NhanVien selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public  DTO_NhanVien selectById(String t) {
+        DTO_NhanVien result = null;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM nhanvien WHERE manv=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            if(rs.next()){
+                int manv = rs.getInt("manv");
+                String hoten = rs.getString("hoten");
+                int gioitinh = rs.getInt("gioitinh");
+                String sdt = rs.getString("sdt");
+                java.sql.Date ngaysinh = rs.getDate("ngaysinh");
+                String email = rs.getString("email");
+                int trangthai = rs.getInt("trangthai");
+                result = new DTO_NhanVien(manv, hoten, gioitinh, ngaysinh, sdt, email, trangthai);
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return result;
     }
 
     @Override
@@ -135,7 +155,7 @@ public class DAO_NhanVien implements DAOInterface<DTO_NhanVien> {
             }
             JDBCUtil.close(con);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Loi lay AUTO_INCREMENT: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi lay AUTO_INCREMENT: " + e.getMessage());
         }
         return -1;
     }

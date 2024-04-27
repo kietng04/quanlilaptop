@@ -33,6 +33,9 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jPanel18 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -91,7 +94,7 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
         });
         jPanel10.add(jTextField1);
 
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 305));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 245));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +110,21 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable2);
 
         jPanel10.add(jScrollPane2);
+
+        jButton4.setText("Thêm sản phẩm");
+        jButton4.setPreferredSize(new java.awt.Dimension(200, 50));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel18.add(jButton4);
+
+        jButton5.setText("Nhập excel");
+        jButton5.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel18.add(jButton5);
+
+        jPanel10.add(jPanel18);
 
         jPanel2.add(jPanel10);
 
@@ -342,6 +360,10 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -389,6 +411,8 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -409,6 +433,7 @@ public class ThemPhieuNhap extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

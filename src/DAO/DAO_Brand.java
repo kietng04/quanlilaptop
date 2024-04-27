@@ -52,6 +52,7 @@ public class DAO_Brand implements DAOInterface<DTO_Brand> {
             JDBCUtil.close(con);
         } catch (Exception e) {
             
+            
         }
         return result;
     }

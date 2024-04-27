@@ -48,4 +48,7 @@ public class BUS_ChiTietCauHinh {
     public void delete(String t1, String t2) {
         chitietproduct.delete(t1, t2);
     }
+    public DTO_ChiTietCauHinh getByMaPhienBan(int mapb) {
+        return chitietproduct.selectById(mapb);
+    }
 }

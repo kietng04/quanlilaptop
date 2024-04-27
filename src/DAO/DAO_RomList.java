@@ -18,8 +18,8 @@ import java.util.ArrayList;
  */
 public class DAO_RomList implements DAOInterface<DTO_RomList> {
     
-    public static DAO_Product getInstance() {
-        return new DAO_Product();
+    public static DAO_RomList getInstance() {
+        return new DAO_RomList();
     }
     
     @Override
@@ -95,7 +95,22 @@ public class DAO_RomList implements DAOInterface<DTO_RomList> {
 
     @Override
     public DTO_RomList selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM rom WHERE `MaROM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                int marom = rs.getInt("MaROM");
+                String KichThuocRom = rs.getString("KichThuocRom");
+                DTO_RomList rom = new DTO_RomList(marom, KichThuocRom);
+                return rom;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 
     @Override

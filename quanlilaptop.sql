@@ -3,6 +3,7 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS quanlilaptop;
 USE quanlilaptop;
+
 CREATE TABLE IF NOT EXISTS `taikhoan` (
   `manv` int(11) NOT NULL,
   `matkhau` varchar(255) NOT NULL,
@@ -35,11 +36,11 @@ CREATE TABLE `sanpham` (
 
 INSERT INTO `sanpham` (`masanpham`, `tensanpham`, `hinhanh`, `boxuly`, `hedieuhanh`, `thoigianbaohanh`, `maloai`, `khuvuckho`, `thuonghieu`,  `trangthai`) 
 VALUES (1, 'LÁP TÓP GA MINH', 'warning.png', 'I9 202444', 'MAC OS', '1 năm', 'GM1', 'Kho A', 'Apple', 1),
-(2, 'Laptop Lenovo Gaming Legion Slim 5', 'warning.png', ' i7 1355U', 'Win 11', '1 năm', 'LGS5', 'Kho B', 'Lenovo', 1),
-(3, 'Laptop Lenovo Gaming Legion Pro 5', 'warning.png', 'i714650HX', 'Win 11', '1 năm', 'LGP5', 'Kho B', 'Lenovo', 1),
-(4, 'Laptop Lenovo Gaming Legion 5', 'warning.png', 'i714650HX', 'Win 11', '1 năm', 'LG5', 'Kho B', 'Lenovo', 1),
-(5, 'Laptop Dell Inspiron 15', 'warning.png', ' i7 1355U', 'Win 10', '1 năm', 'DI15', 'Kho A', 'Dell', 1),
-(6, 'Laptop Dell Inspiron 14', 'warning.png', ' i5 11400H', 'Win 10', '1 năm', 'DI14', 'Kho A', 'Dell', 1);
+(2, 'LENOVO LEGION 5', 'warning.png', ' i7 1355U', 'Win 11', '1 năm', 'LG5', 'Kho B', 'Lenovo', 1),
+(3, 'MACBOOK PRO 14 Inch', 'warning.png', 'M2', 'MAC OS', '1 năm', 'MACP', 'Kho B', 'Apple', 1),
+(4, 'MACBOOK AIR M2', 'warning.png', 'M2', 'MAC OS', '1 năm', 'MACA', 'Kho B', 'Apple', 1),
+(5, 'ACER NITRO 5', 'warning.png', ' i7 1355U', 'Win 11', '1 năm', 'DI15', 'Kho A', 'ACER', 1),
+(6, 'MSI GAMING XF', 'warning.png', ' i5 11400H', 'Win 11', '1 năm', 'DI14', 'Kho A', 'MSI', 1);
 
 --
 -- Table structure for table `nhanvien`
@@ -79,8 +80,28 @@ CREATE TABLE `phienbansanpham` (
   `soluongton` int(11) DEFAULT 0,
   `trangthai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 INSERT INTO `phienbansanpham` (`maphienbansp`, `masanpham`, `rom`, `ram`, `gianhap`, `giaxuat`, `soluongton`, `trangthai`) VALUES
-(1, 1, 512, 8, 10000000, 16000000, 12, 1);
+(1, 1, 512, 16, 10000000, 15000000, 12, 1),
+(2, 1, 256, 16, 5000000, 9000000, 2, 1),
+(3, 1, 256, 8, 4000000, 6000000, 1, 1),
+(4, 2, 512, 16, 29000000, 22000000, 30, 1),
+(5, 2, 256, 16, 26000000, 19000000, 20, 1),
+(6, 2, 256, 8, 19000000, 16000000, 10, 1),
+(7, 3, 512, 16, 29000000, 39000000, 3, 1),
+(8, 3, 256, 16, 26000000, 29000000, 2, 1),
+(9, 3, 256, 8, 19000000, 24000000, 1, 1),
+(10, 4, 512, 16, 29000000, 39000000, 5, 1),
+(11, 4, 256, 16, 19000000, 29000000, 4, 1),
+(12, 4, 256, 8, 9000000, 19000000, 1, 1),
+(13, 5, 512, 16, 21000000, 39000000, 9, 1),
+(14, 5, 256, 16, 11000000, 29000000, 9, 1),
+(15, 5, 256, 8, 10000000, 24000000, 9, 1),
+(16, 6, 512, 16, 19000000, 39000000, 1, 1),
+(17, 6, 256, 16, 14000000, 29000000, 1, 1),
+(18, 6, 256, 8, 9000000, 24000000, 1, 1);
+
+
 
 
 CREATE TABLE `thuonghieu` (
@@ -182,5 +203,66 @@ INSERT INTO `KhachHang` (`MaKH`, `TenKH`, `DiaChi`, `SDT`, `NgayThamGia`, `GioiT
 (5, 'Nguyễn Văn E', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12','Nam', 1),
 (6, 'Nguyễn Văn F', '123 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng', '0365888866', '2022-12-12', 'Nam', 1);
 
+
+CREATE TABLE `phieunhap` (
+  `maphieunhap` int(11) NOT NULL,
+  `thoigian` datetime DEFAULT current_timestamp(),
+  `manhacungcap` int(11) NOT NULL,
+  `nguoitao` int(11) NOT NULL,
+  `tongtien` bigint(20) NOT NULL DEFAULT 0,
+  `trangthai` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `phieunhap` (`maphieunhap`, `thoigian`, `manhacungcap`, `nguoitao`, `tongtien`, `trangthai`) VALUES
+(1, '2023-04-01 17:34:12', 1, 1, 60000000, 1),
+(2, '2023-04-03 17:42:17', 1, 1, 110000000, 1),
+(3, '2023-04-04 18:07:58', 1, 1, 84000000, 1),
+(4, '2023-04-04 18:19:51', 3, 4, 35000000, 1),
+(5, '2023-04-06 08:18:01', 1, 1, 10000000, 1),
+(6, '2023-04-07 20:33:58', 1, 1, 75000000, 1);
+
+
+CREATE TABLE `ctphieunhap` (
+  `maphieunhap` int(11) NOT NULL,
+  `maphienbansp` int(11) NOT NULL DEFAULT 0,
+  `soluong` int(11) NOT NULL DEFAULT 0,
+  `dongia` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ctphieunhap`
+--
+
+INSERT INTO `ctphieunhap` (`maphieunhap`, `maphienbansp`, `soluong`, `dongia`) VALUES
+(1, 1, 5, 19000000),
+(1, 2, 5, 17000000),
+(1, 3, 5, 9000000),
+(2, 4, 1, 3000000),
+(2, 5, 1, 3000000),
+(2, 6, 1, 3000000);
+
+CREATE TABLE `ctsanpham` (
+  `maimei` varchar(255) NOT NULL DEFAULT 'AUTO_INCREMENT' COMMENT 'Mã imei của sản phẩm',
+  `maphienbansp` int(11) NOT NULL,
+  `maphieunhap` int(11) NOT NULL,
+  `maphieuxuat` int(11) DEFAULT NULL,
+  `tinhtrang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ctsanpham`
+--
+
+INSERT INTO `ctsanpham` (`maimei`, `maphienbansp`, `maphieunhap`, `maphieuxuat`, `tinhtrang`) VALUES
+('107725056444797', 1, 1, NULL, 1),
+('107725056444798', 2, 1, NULL, 1), 
+('107725056444799', 3, 1, NULL, 1),
+('107725056444800', 4, 2, NULL, 1),
+('107725056444801', 5, 2, NULL, 1),
+('107725056444802', 6, 2, NULL, 1),
+('107725056444803', 7, 3, NULL, 1),
+('111111111111111', 8, 3, NULL, 1),
+('111111111111112', 9, 3, NULL, 1);
 
 COMMIT;

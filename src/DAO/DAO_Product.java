@@ -124,7 +124,29 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
 
     @Override
     public DTO_Product selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM sanpham WHERE `masanpham`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                int madm = rs.getInt("masanpham");
+                String tendm = rs.getString("tensanpham");
+                String hinhanh = rs.getString("hinhanh");
+                String boxuly = rs.getString("boxuly");
+                String hedieuhanh = rs.getString("hedieuhanh");
+                String thoigianbaohanh = rs.getString("thoigianbaohanh");
+                String khuvuckho = rs.getString("khuvuckho");
+                int trangthai = rs.getInt("trangthai");
+                String thuonghieu = rs.getString("thuonghieu");
+                int maloai = rs.getInt("maloai");
+                return new DTO_Product(madm, tendm, boxuly, hedieuhanh, khuvuckho,hinhanh, thoigianbaohanh,trangthai, thuonghieu, maloai);
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     @Override
@@ -166,7 +188,7 @@ public class DAO_Product implements DAOInterface<DTO_Product>{
                 int trangthai = rs.getInt("trangthai");
                 String thuonghieu = rs.getString("thuonghieu");
                 int maloai = rs.getInt("maloai");    
-                return new DTO_Product(madm,tendm,boxuly,hedieuhanh, khuvuckho,hinhanh, thoigianbaohanh,trangthai, thuonghieu, maloai);
+                return new DTO_Product(madm, tendm ,boxuly,hedieuhanh, khuvuckho,hinhanh, thoigianbaohanh,trangthai, thuonghieu, maloai);
             }
             JDBCUtil.close(con);
         } catch (Exception e) {
