@@ -14,12 +14,26 @@ import GUI.CRUD.ThemPhieuNhapDialog;
 import GUI.CRUD.XemChiTietPhieuNhapDialog;
 import helper.Formater;
 
+import java.sql.Timestamp;
+import java.beans.PropertyChangeEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.formdev.flatlaf.json.ParseException;
 
 /**
  *
@@ -39,20 +53,164 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     public QuanLyPhieuNhap() {
         initComponents();
         loadTable();
+        loadComboSearch();
+        onChangeSearch();
+
     }
 
-    public void loadTable() {
+    // onChangeSearch
+    public void onChangeSearch() {
+        jComboBox1.addActionListener((e) -> {
+            try {
+                Fillter();
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
+        jComboBox2.addActionListener((e) -> {
+            try {
+                Fillter();
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
+        jComboBoxNCC.addActionListener((e) -> {
+            try {
+                Fillter();
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
+        txtSearchNCC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                try {
+                    Fillter();
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                try {
+                    Fillter();
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                try {
+                    Fillter();
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+         
+    }
+    // loadComboSearch
+    public void loadComboSearch() {
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Tất cả");
+        for (int i = 0; i < nccBUS.getAllData().size(); i++) {
+            jComboBox1.addItem(nccBUS.getAllData().get(i).getTenncc());
+        }
+
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("Tất cả");
+        for (int i = 0; i < nvBUS.getAllData().size(); i++) {
+            jComboBox2.addItem(nvBUS.getAllData().get(i).getHoten());
+        }
+
+        jComboBoxNCC.removeAllItems();
+        jComboBoxNCC.addItem("Tất cả");
+        jComboBoxNCC.addItem("Mã phiếu nhập");
+        jComboBoxNCC.addItem("Tên nhà cung cấp");
+        jComboBoxNCC.addItem("Tên nhân viên");
+    }
+
+    
+
+    public void Fillter() throws ParseException {
+        int type = jComboBoxNCC.getSelectedIndex();
+        int mancc = jComboBox1.getSelectedIndex() == 0 ? 0
+                : nccBUS.getByIndex(jComboBox1.getSelectedIndex() - 1).getMancc();
+        int manv = jComboBox2.getSelectedIndex() == 0 ? 0
+                : nvBUS.getByIndex(jComboBox2.getSelectedIndex() - 1).getManv();
+        String input = txtSearchNCC.getText() != null ? txtSearchNCC.getText() : "";
+        Date time_start = jDateChooser1.getDate() != null ? new Date(jDateChooser1.getDate().getTime()) : null;
+        Date time_end = jDateChooser2.getDate() != null ? new Date(jDateChooser2.getDate().getTime()) : null;
+        String min_price = jTextField3.getText();
+        String max_price = jTextField4.getText();
+        this.listPhieu = phieunhapBUS.fillerPhieuNhap(type, input, mancc, manv, time_start, time_end, min_price,
+                max_price);
+        loadDataTalbe(listPhieu);
+    }
+    
+
+    public void resetForm() {
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0);
+        txtSearchNCC.setText("");
+        jDateChooser1.setDate(null);
+        jDateChooser2.setDate(null);
+        jTextField3.setText("");
+        jTextField4.setText("");
+        this.listPhieu = phieunhapBUS.getAll();
+        loadDataTalbe(listPhieu);
+    }
+    
+    public boolean validateSelectDate() throws ParseException {
+        Date time_start = jDateChooser1.getDate() != null ? new Date(jDateChooser1.getDate().getTime()) : null;
+        Date time_end = jDateChooser2.getDate() != null ? new Date(jDateChooser2.getDate().getTime()) : null;
+        // if(time_start < time_end){
+        //     JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu", "Lỗi !", JOptionPane.ERROR_MESSAGE);
+        //     return false;
+        // }
+
+        // Date current_date = new Date();
+        // if (time_start != null && time_start.after(current_date)) {
+        //     JOptionPane.showMessageDialog(this, "Ngày bắt đầu không được lớn hơn ngày hiện tại", "Lỗi !", JOptionPane.ERROR_MESSAGE);
+        //     dateStart.getDateChooser().setCalendar(null);
+        //     return false;
+        // }
+        // if (time_end != null && time_end.after(current_date)) {
+        //     JOptionPane.showMessageDialog(this, "Ngày kết thúc không được lớn hơn ngày hiện tại", "Lỗi !", JOptionPane.ERROR_MESSAGE);
+        //     dateEnd.getDateChooser().setCalendar(null);
+        //     return false;
+        // }
+        // if (time_start != null && time_end != null && time_start.after(time_end)) {
+        //     JOptionPane.showMessageDialog(this, "Ngày kết thúc phải lớn hơn ngày bắt đầu", "Lỗi !", JOptionPane.ERROR_MESSAGE);
+        //     dateEnd.getDateChooser().setCalendar(null);
+        //     return false;
+        // }
+        return true;
+    }
+
+    public int getRowSelected() {
+        return jTablePN.getSelectedRow();
+
+    }
+    // loadDataTalbe
+    public void loadDataTalbe(ArrayList<DTO_PhieuNhap> list) {
         model = (DefaultTableModel) jTablePN.getModel();
         model.setRowCount(0);
-        listPhieu = phieunhapBUS.getAll();
-        for (int i = 0; i < listPhieu.size(); i++) {
-            DTO_PhieuNhap phieu = listPhieu.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            DTO_PhieuNhap phieu = list.get(i);
             model.addRow(new Object[] {
-                phieu.getMaphieu(),
-                phieu.getThoigiantao(),
-                nccBUS.getTenNhaCungCap(phieu.getManhacungcap()),
-                nvBUS.getNameById(phieu.getManguoitao()),
-                Formater.FormatVND(phieu.getTongTien())
+                    phieu.getMaphieu(),
+                    phieu.getThoigiantao(),
+                    nccBUS.getTenNhaCungCap(phieu.getManhacungcap()),
+                    nvBUS.getNameById(phieu.getManguoitao()),
+                    Formater.FormatVND(phieu.getTongTien())
             });
         }
         // JOptionPane.showMessageDialog(null, "Load table thành công:" + listPhieu.size());
@@ -62,9 +220,94 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         for (int i = 0; i < 5; i++) {
             jTablePN.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
-            
-        
     }
+
+    public void loadTable() {
+        model = (DefaultTableModel) jTablePN.getModel();
+        model.setRowCount(0);
+        listPhieu = phieunhapBUS.getAll();
+        for (int i = 0; i < listPhieu.size(); i++) {
+            DTO_PhieuNhap phieu = listPhieu.get(i);
+            model.addRow(new Object[] {
+                    phieu.getMaphieu(),
+                    phieu.getThoigiantao(),
+                    nccBUS.getTenNhaCungCap(phieu.getManhacungcap()),
+                    nvBUS.getNameById(phieu.getManguoitao()),
+                    Formater.FormatVND(phieu.getTongTien())
+            });
+        }
+        // JOptionPane.showMessageDialog(null, "Load table thành công:" + listPhieu.size());
+        // can giua
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < 5; i++) {
+            jTablePN.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+    }
+    public void exportJTableToExcel() {
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Chọn đường dẫn lưu file Excel");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX files", "xlsx");
+    fileChooser.setFileFilter(filter);
+    fileChooser.setAcceptAllFileFilterUsed(false);
+
+    int userChoice = fileChooser.showSaveDialog(null);
+    if (userChoice == JFileChooser.APPROVE_OPTION) {
+        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+        if (!filePath.toLowerCase().endsWith(".xlsx")) {
+            filePath += ".xlsx";
+        }
+
+        model = (DefaultTableModel) jTablePN.getModel();
+
+        Workbook workbook = new XSSFWorkbook();
+        org.apache.poi.ss.usermodel.Sheet sheet = workbook.createSheet();
+
+        // Create header row
+        org.apache.poi.ss.usermodel.Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Mã phiếu");
+        headerRow.createCell(1).setCellValue("Thời gian tạo");
+        headerRow.createCell(2).setCellValue("Tên nhà cung cấp");
+        headerRow.createCell(3).setCellValue("Tên người tạo");
+        headerRow.createCell(4).setCellValue("Tổng tiền");
+
+        int columnWidth = 30 * 256; // 50 characters wide
+        for (int i = 0; i < 5; i++) {
+            sheet.setColumnWidth(i, columnWidth);
+        }
+        // Create data rows
+        for (int i = 0; i < model.getRowCount(); i++) {
+            org.apache.poi.ss.usermodel.Row row = sheet.createRow(i + 1);
+            row.createCell(0).setCellValue(model.getValueAt(i, 0).toString());
+            row.createCell(1).setCellValue(model.getValueAt(i, 1).toString());
+            row.createCell(2).setCellValue(model.getValueAt(i, 2).toString());
+            row.createCell(3).setCellValue(model.getValueAt(i, 3).toString());
+            row.createCell(4).setCellValue(model.getValueAt(i, 4).toString());
+        }
+
+        // Write to file
+        try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+            workbook.write(outputStream);
+            // Show success message
+            JOptionPane.showMessageDialog(null, "Xuất Excel thành công!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,9 +329,11 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jPanel18 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel19 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel20 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -171,6 +416,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Từ ngày");
         jPanel18.add(jLabel3, java.awt.BorderLayout.PAGE_START);
+        jPanel18.add(jDateChooser1, java.awt.BorderLayout.PAGE_END);
 
         jPanel15.add(jPanel18);
 
@@ -184,6 +430,7 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Đến ngày");
         jPanel19.add(jLabel4, java.awt.BorderLayout.PAGE_START);
+        jPanel19.add(jDateChooser2, java.awt.BorderLayout.PAGE_END);
 
         jPanel15.add(jPanel19);
 
@@ -194,7 +441,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel5.setText("Từ số tiền (VNĐ)");
         jPanel20.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jTextField3.setText("jTextField3");
         jTextField3.setPreferredSize(new java.awt.Dimension(71, 30));
         jPanel20.add(jTextField3, java.awt.BorderLayout.PAGE_END);
 
@@ -207,7 +453,6 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel6.setText("Đến số tiền (VNĐ)");
         jPanel21.add(jLabel6, java.awt.BorderLayout.CENTER);
 
-        jTextField4.setText("jTextField4");
         jTextField4.setPreferredSize(new java.awt.Dimension(71, 30));
         jPanel21.add(jTextField4, java.awt.BorderLayout.PAGE_END);
 
@@ -239,8 +484,9 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -595,11 +841,28 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        exportJTableToExcel();
+        
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        XemChiTietPhieuNhapDialog dialog = new XemChiTietPhieuNhapDialog(new javax.swing.JFrame(), true);
+        int index = jTablePN.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn phiếu nhập để xem chi tiết!");
+            return;
+        }
+        int id = (int) jTablePN.getValueAt(index, 0);
+     Timestamp date = (Timestamp) jTablePN.getValueAt(index, 1);
+     int mancc = nccBUS.getMaNhaCungCap(jTablePN.getValueAt(index, 2).toString());
+     int manv = nvBUS.getIdByName(jTablePN.getValueAt(index, 3).toString());
+     String tongtienStr = jTablePN.getValueAt(index, 4).toString().replace("đ", "").replace(",", "");
+     long tongtien = Long.parseLong(tongtienStr);
+        JOptionPane.showMessageDialog(null, "ID: " + id + " Date: " + date + " NCC: " + mancc + " NV: " + manv + " TongTien: " + tongtien);
+        DTO_PhieuNhap pn = new DTO_PhieuNhap(id, date,mancc, manv, tongtien, 1);
+
+        XemChiTietPhieuNhapDialog dialog = new XemChiTietPhieuNhapDialog(new javax.swing.JFrame(), true, pn);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -671,6 +934,8 @@ public class QuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBoxNCC;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1NCC;
     private javax.swing.JLabel jLabel2;

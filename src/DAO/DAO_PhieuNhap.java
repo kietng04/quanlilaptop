@@ -22,8 +22,12 @@ import java.sql.SQLException;
  *
  * @author KIET
  */
-public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap>{
-
+public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap> {
+    
+    // getInstance
+    public static DAO_PhieuNhap getInstance() {
+        return new DAO_PhieuNhap();
+    }
     @Override
     public int insert(DTO_PhieuNhap t) {
         int result = 0;
@@ -38,9 +42,9 @@ public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap>{
             pst.setDouble(5, t.getTongTien());
             result = pst.executeUpdate();
             JDBCUtil.close(con);
-             JOptionPane.showMessageDialog(null, "Them thanh cong phieu nhap: "+ result);
+            //  JOptionPane.showMessageDialog(null, "Them thanh cong phieu nhap: "+ result);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Loi insert: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi insert: " + e.getMessage());
         }
         return result;
     }
@@ -74,10 +78,10 @@ public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap>{
                 result.add(phieunhap);
 
             }
-            JOptionPane.showMessageDialog(null, "Lay du lieu thanh cong: "+result);
+            // JOptionPane.showMessageDialog(null, "Lay du lieu thanh cong: "+result);
             JDBCUtil.close(con);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Loi lay du lieu: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi lay du lieu: " + e.getMessage());
         }
         return result;
        
@@ -85,7 +89,27 @@ public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap>{
 
     @Override
     public DTO_PhieuNhap selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DTO_PhieuNhap result = null;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM phieunhap WHERE maphieunhap = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int maphieu = rs.getInt("maphieunhap");
+                java.sql.Timestamp thoigiantao = rs.getTimestamp("thoigian");
+                int mancc = rs.getInt("manhacungcap");
+                int nguoitao = rs.getInt("nguoitao");
+                long tongtien = rs.getLong("tongtien");
+                int trangthai = rs.getInt("trangthai");
+                result = new DTO_PhieuNhap(maphieu, thoigiantao, mancc, nguoitao, tongtien, trangthai);
+            }
+            JDBCUtil.close(con);
+        } catch (SQLException e) {
+            // JOptionPane.showMessageDialog(null, "Loi select by id: " + e.getMessage());
+        }
+        return result;
     }
 
     @Override
@@ -118,9 +142,9 @@ public class DAO_PhieuNhap implements DAOInterface<DTO_PhieuNhap>{
             pst.setInt(1, maphieu);
             result = pst.executeUpdate();
             JDBCUtil.close(con);
-            JOptionPane.showMessageDialog(null, "Huy phieu nhap thanh cong: "+ result);
+            // JOptionPane.showMessageDialog(null, "Huy phieu nhap thanh cong: "+ result);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Loi huy phieu nhap: "+ ex.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi huy phieu nhap: "+ ex.getMessage());
             
         }
         return result;

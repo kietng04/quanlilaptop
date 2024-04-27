@@ -201,7 +201,9 @@ public class DAO_ChiTietCauHinh implements DAOInterface_Detail<DTO_ChiTietCauHin
                 result = new DTO_ChiTietCauHinh(maphienbansp, masanpham, rom, ram, gianhap, giaxuat, soluongton);
             }
             JDBCUtil.close(con);
+            JOptionPane.showMessageDialog(null, "Select thanh cong");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Loi select: " + e.getMessage());
         }
         return result;
     }

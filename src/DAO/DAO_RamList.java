@@ -12,13 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kiet
  */
 public class DAO_RamList implements DAOInterface<DTO_RamList> {
-    public static DAO_Product getInstance() {
-        return new DAO_Product();
+    public static DAO_RamList getInstance() {
+        return new DAO_RamList();
     }
 
     @Override
@@ -94,7 +96,24 @@ public class DAO_RamList implements DAOInterface<DTO_RamList> {
 
     @Override
     public DTO_RamList selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM ram WHERE `MaRAM`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                int maram = rs.getInt("MaRAM");
+                String KichThuocRam = rs.getString("KichThuocRam");
+                DTO_RamList ram = new DTO_RamList(maram, KichThuocRam);
+                return ram;
+            }
+            JOptionPane.showMessageDialog(null, "Không tìm thấy RAM");
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Lỗi select RAM: " + e.getMessage());
+        }
+        return null;
     }
 
     @Override

@@ -39,11 +39,24 @@ public class BUS_NhaCungCap {
     public void delete(int id) {
         ncc.delete(id);
     }
-   
+
+    public int getMaNhaCungCap(String tenncc) {
+        int i = 0;
+        int mancc = -1;
+        while (i < this.listNCC.size() && mancc == -1) {
+            if (listNCC.get(i).getTenncc().equals(tenncc)) {
+                mancc = listNCC.get(i).getMancc();
+            } else {
+                i++;
+            }
+        }
+        return mancc;
+    }
+
     public String getTenNhaCungCap(int mancc) {
-        //JOptionPane.showMessageDialog(null, "getTenNhaCungCap: "+this.listNCC.get(mancc).getTenncc());
         return this.listNCC.get(getIndexByMaNCC(mancc)).getTenncc();
     }
+
     public int getIndexByMaNCC(int mancc) {
         int i = 0;
         int vitri = -1;
@@ -55,6 +68,11 @@ public class BUS_NhaCungCap {
             }
         }
         return vitri;
+    }
+    
+    //getByIndex
+    public DTO_NhaCungCap getByIndex(int index) {
+        return listNCC.get(index);
     }
     
 

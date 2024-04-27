@@ -242,4 +242,27 @@ INSERT INTO `ctphieunhap` (`maphieunhap`, `maphienbansp`, `soluong`, `dongia`) V
 (2, 5, 1, 3000000),
 (2, 6, 1, 3000000);
 
+CREATE TABLE `ctsanpham` (
+  `maimei` varchar(255) NOT NULL DEFAULT 'AUTO_INCREMENT' COMMENT 'Mã imei của sản phẩm',
+  `maphienbansp` int(11) NOT NULL,
+  `maphieunhap` int(11) NOT NULL,
+  `maphieuxuat` int(11) DEFAULT NULL,
+  `tinhtrang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ctsanpham`
+--
+
+INSERT INTO `ctsanpham` (`maimei`, `maphienbansp`, `maphieunhap`, `maphieuxuat`, `tinhtrang`) VALUES
+('107725056444797', 1, 1, NULL, 1),
+('107725056444798', 2, 1, NULL, 1), 
+('107725056444799', 3, 1, NULL, 1),
+('107725056444800', 4, 2, NULL, 1),
+('107725056444801', 5, 2, NULL, 1),
+('107725056444802', 6, 2, NULL, 1),
+('107725056444803', 7, 3, NULL, 1),
+('111111111111111', 8, 3, NULL, 1),
+('111111111111112', 9, 3, NULL, 1);
+
 COMMIT;

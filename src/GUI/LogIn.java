@@ -32,9 +32,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-
 public class LogIn extends JFrame implements KeyListener {
-
     JPanel pnlMain, pnlLogIn;
     JLabel lblImage, lbl1, lbl2, lbl3, lbl4, lbl5, lbLogin, lbl7;
     InputForm txtUsername, txtPassword;
@@ -100,6 +98,7 @@ public class LogIn extends JFrame implements KeyListener {
                 }
             }
         });
+        
         pnlLogIn.add(lbLogin);
         
         pnlMain.add(pnlLogIn);

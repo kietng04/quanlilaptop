@@ -40,7 +40,7 @@ public class DAO_NhaCungCap implements DAOInterface<DTO_NhaCungCap>{
             JDBCUtil.close(con);
             return result;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi them nha cung cap: " + e.getMessage());
+            // JOptionPane.showMessageDialog(null, "Loi them nha cung cap: " + e.getMessage());
             return -1;
         }
     }
@@ -62,7 +62,7 @@ public class DAO_NhaCungCap implements DAOInterface<DTO_NhaCungCap>{
             JDBCUtil.close(con);
             return result;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi cap nhat nha cung cap: ");
+            // JOptionPane.showMessageDialog(null, "Loi cap nhat nha cung cap: ");
             e.printStackTrace();
             return -1;
         }
@@ -80,7 +80,7 @@ public class DAO_NhaCungCap implements DAOInterface<DTO_NhaCungCap>{
             JDBCUtil.close(con);
             return result;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi xoa nha cung cap: ");
+            // JOptionPane.showMessageDialog(null, "Loi xoa nha cung cap: ");
             e.printStackTrace();
             return -1;
         }
@@ -105,10 +105,10 @@ public class DAO_NhaCungCap implements DAOInterface<DTO_NhaCungCap>{
             }
             JDBCUtil.close(con);    
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Loi truy van du lieu: ");   
+            // JOptionPane.showMessageDialog(null, "Loi truy van du lieu: ");   
             e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(null, "Nội dung của listProduct: " + result);
+        // JOptionPane.showMessageDialog(null, "Nội dung của listProduct: " + result);
         //tra ve danh sach DTO_NhaCungCap
         return result;
     }
@@ -116,7 +116,27 @@ public class DAO_NhaCungCap implements DAOInterface<DTO_NhaCungCap>{
     @Override
     
     public DTO_NhaCungCap selectById(String t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = (Connection) JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM `nhacungcap` WHERE `manhacungcap`=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int mancc = rs.getInt("manhacungcap");
+                String tenncc = rs.getString("tennhacungcap");
+                String diachi = rs.getString("diachi");
+                String email = rs.getString("email");
+                String sdt = rs.getString("sdt");
+                DTO_NhaCungCap ncc = new DTO_NhaCungCap(mancc, tenncc, diachi, email, sdt, 1);
+                return ncc;
+            }
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            // JOptionPane.showMessageDialog(null, "Loi truy van du lieu: ");
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
